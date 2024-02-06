@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+h1 {
+  font-size: 56px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+p2 {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+p1 {
+  font-size: 20px;
+  font-weight: normal;
+}
+@layer components{
+  .translucent{
+    @apply bg-[#1c1e2a6e] backdrop-blur-2xl shadow-2xl;
+  }
+}
