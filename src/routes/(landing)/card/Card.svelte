@@ -1,74 +1,130 @@
 <script>
   import acchan from "../../../assets/img/acchan.png"
+  import QuarterCircle from "../../../lib/circularbar.svelte"
+  import LinedTitle from "../../../lib/lined_title.svelte"
+  import { tweened } from 'svelte/motion'
+  import { quadOut } from 'svelte/easing'
 
+  export var intro_ended = false
+  //intro_ended = true
+  
+  var window = null
+  var value = tweened(0.0, {
+    duration: 2000,
+    easing: quadOut
+  })
 
-  export var intro_1_ended = false
   const nav_list = [
     {text: "Home", link:"", icon: "fa-house"},
     {text: "About", link:"", icon: "fa-address-card"},
     {text: "Portfolio", link:"", icon: "fa-image"},
     {text: "Blog", link:"", icon: "fa-address-book"},
   ]
+
+  const links = [
+    {link: "www.google.com", icon:"fa-brands fa-instagram", name:"Instagram"},
+    {link: "www.google.com", icon:"fa-brands fa-x-twitter", name:"Twitter"},
+    {link: "www.google.com", icon:"fa-brands fa-github", name:"Github"},
+    {link: "www.google.com", icon:"fa-brands fa-pixiv", name:"Pixiv"},
+    {link: "www.google.com", icon:"fa-brands fa-square-youtube", name:"Youtube"}
+  ]
+  
+  $: {
+    if (intro_ended){
+      setTimeout(()=> {
+        value.set(75.0)
+      }, 300)
+    }
+  }
+    
+
 </script>
 
+<!----------------------------------- Window Container ----------------------------------->
 <div class="absolute flex justify-center items-center top-0 left-0 h-screen w-screen">
-  {#if intro_1_ended}
-    <div class="relative translucent anim h-[60%] w-[55%] max-sm:w-[90%] rounded-3xl flex justify-center items-center">
-    <div class="opacity-0 opacity-animate bg-white absolute translucent h-full w-full max-sm:w-[90%] rounded-3xl pointer-events-none"/>
-      <div class="flex flex-col h-full w-full gap-10 py-12 max-md:p-6 ">
-        <div class="w-full h-full">
-          <div class="grid grid-flow-col gap-4 w-full h-full">
-            <div class="flex flex-col justify-center items-center w-full h-full ">
-              <div class="w-full h-full flex justify-start p-2 px-10">
-                <div class ="absolute">
-                  <p1>[ravimo@ravimo ~]$ Hello, welcome to my page!</p1>
-                </div>
+  <!-- Check if backdrop animation is completed -->
+  {#if intro_ended}
+    <!-- Window -->
+    <div class="translucent-round anim relative flex justify-start items-center flex-col duration-200
+                min-h-[70%] max-w-[60%]
+                3xl:min-w-[40%] 3xl:min-h-[50%]
+                max-xl:max-w-[80%]
+                max-md:max-w-[90%]">
+        
+        <!---------------------- Upper Section ---------------------->
+        <div class="flex-middle items-start gap-2 px-10 mt-20
+                    max-lg:flex-col max-lg:items-center">
+
+          <!-- Arch-chan Container -->
+          <div class="max-w-[16rem]
+                      max-xl:max-w-[14rem]
+                      max-lg:max-w-[12rem]
+                      max-sm:max-w-[10rem]">
+
+            <!-- Arch-chan Pic Border Container (position absolute goes wank if the width and height is not redefined) -->
+            <div class="absolute rounded-full
+                        w-[16rem] h-[16rem]
+                        max-xl:w-[14rem] max-xl:h-[14rem]
+                        max-lg:w-[12rem] max-lg:h-[12rem]
+                        max-sm:w-[10rem] max-sm:h-[10rem]">
+
+              <!-- Arch-chan Pic Border Quarter Circle -->
+              <div class="absolute -scale-x-100 w-full h-full">
+                <section class="animate-[spin_3s]">
+                  <QuarterCircle bind:value={$value} info="" color="white" textColor="transparent" trackColor="transparent" thickness=4px/>
+                </section>
               </div>
-              <img src={acchan} class="max-sm:size-24 py-5 mt-10 object-contain h-80 w-80">
+              <!-- Arch-chan Pic Border Dotted -->
+              <div class="absolute animate-[spin_30s_linear_infinite] rounded-full w-full h-full outline-dashed outline-white outline-offset-[-5px] outline-2"/>
             </div>
-            <div class=" flex p-2 flex-col justify-start items-center">
-              <p1>Navigation</p1>
-              <div class="h-[1px] w-[50%] bg-white my-2"></div>
-              {#each nav_list as list}
-                <a href={list.link} class="flex flex-row justify-center items-center w-1/2 p-1 mx-10">
-                  <i class="fa-solid mx-3 text-lg {list.icon}"></i>
-                  <div class="flex flex-col justify-center items-center w-full p-1 m-3
-                  hover:bg-white hover:text-black">
-                    <p1>{list.text}</p1>
-                  </div>
-                </a>
-              {/each}
-            </div>
+            <!-- Arch-chan Image -->
+            <img src={acchan} class="rounded-full scale-[90%]" alt="">
+          </div>
+
+          <!-- Biodata -->
+          <div class="flex-middle flex-col gap-5 ms-10 text-justify
+                      max-lg:mx-10 max-lg:my-10">
+              <!--First Line-->
+              <LinedTitle title="Ravimo"/>
+              <p1>
+                Hello! I am Ravimo, an illustrator,
+                front end developer, game developer, and open-source enthusiast.
+                Welcome to my web page!
+              </p1>
+              <!--Second Line-->
+              <LinedTitle/>
+              <!--Links list-->
+              <div class="flex-middle flex-row">
+                {#each links as link}
+                  <a href={link.link} class="group hover:bg-white">
+                    <div class="flex-middle group-hover:bg-white">
+                      <i class={link.icon + " text-3xl px-2 group-hover:text-black"}/>  
+                      <p3 class="absolute text-white hidden group-hover:translate-y-9 group-hover:block">{link.name}</p3>
+                    </div>
+                  </a>
+                {/each}
+              </div>
           </div>
         </div>
+        <!---------------------- Mid Section ---------------------->
+        <div class="flex-middle h-10">
 
-        <div class="relative grid grid-cols-5 w-full h-full">
-            <div class="col-span-2">
-              <div class="flex justify-center items-center w-full h-full">
-                <div class="bg-white w-[80%] h-[1px]"/>
-              </div>
-            </div>
-            <button href="/" class="relative border-white border-solid border-2 group rounded-full text-center align-middle">
-              <div
-                class="absolute top-0 left-0 w-0 h-full bg-white opacity-50 z-0 rounded-full group-hover:w-full duration-200"/>
-              <p1 class=" z-10">&darr; Portfolio &darr;</p1>
-            </button>
-            <div class="col-span-2 col-start-4">
-              <div class="flex justify-center items-center w-full h-full">
-                <div class="bg-white w-[80%] h-[1px]"/>
-              </div>
-            </div>
         </div>
-      </div>
 
-      <div class="absolute w-[97%] h-6 top-4">
-        <div class="relative flex justify-start align-middle items-center w-full h-full gap-2">
+      <!----------------------------------- Window Decoration Section ----------------------------------->
+
+      <!-- White window -->
+      <div class="absolute top-0 opacity-0 opacity-animate bg-white translucent h-full w-full max-sm:w-[90%] rounded-3xl pointer-events-none"/>
+      <!-- Tab -->
+      <div class="absolute w-[95%] h-6 top-4">
+        <div class="relative flex-middle justify-start gap-2">
           <i class="fa-solid fa-circle text-xl text-red-400"></i>
           <i class="fa-solid fa-circle text-xl text-green-300"></i>
           <i class="fa-solid fa-circle text-xl text-yellow-200"></i>
           <div class="bg-white h-[1px] w-full opacity-30"/>
         </div>
       </div>
+      
     </div>
   {/if}
 </div>
@@ -115,7 +171,7 @@
     }
     100% {
       opacity: 0;
-      width: 0%;
+      width: 100%;
     }
 
   }

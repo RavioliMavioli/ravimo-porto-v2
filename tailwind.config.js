@@ -8,8 +8,15 @@ export default {
         'backdrop2': "url('/src/assets/img/backdrop2.jpg')",
         'backdrop3': "url('/src/assets/img/backdrop3.jpg')",
         'backdrop4': "url('/src/assets/img/backdrop4.jpg')"
+      },
+      maxWidth: {
+        'xl': '1000'
+      },
+      screens: {
+        '3xl': '2160px',
       }
     }
   },
+  
   plugins: []
 };

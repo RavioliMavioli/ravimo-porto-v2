@@ -1,14 +1,13 @@
 <script>
 
   import { quartOut} from "svelte/easing"
-  import {slide} from "svelte-legos"
+  import { slide } from "svelte-legos"
 
 
-  export var intro_1_ended = false
-  var init = false
+  export var intro_ended = false
+  var init, anim_finished = false
   var backdrop, opacity = null
-  var anim_finished = false
-  var mobile = false
+  
   const duration = 500
   const total_duration = 1000
   const bg_class = " bg-cover bg-center bg-repeat"
@@ -36,7 +35,7 @@
 
   // Somehow the animation won't execute when not inside the #if block
   setTimeout(() => {init = true}, 1)
-  setTimeout(() => {intro_1_ended = true}, total_duration * 1.5)
+  setTimeout(() => {intro_ended = true}, total_duration * 1.5)
   setTimeout(() => {anim_finished = true}, total_duration * 2.0)
 
 	$: {
@@ -46,25 +45,25 @@
       }
 		}
     if(opacity) {
-      if (intro_1_ended){
+      if (intro_ended){
 			  opacity.classList.add('opacity-animate', 'bg-black')
       }
       if (anim_finished){
         opacity.classList.add('opacity-30')
       }
+    
 		}
 	}
 
 </script>
 
 <div class="fixed flex justify-center items-center overflow-hidden" bind:this={backdrop}>
-  <div class="grid grid-flow-col grid-cols-4 w-screen h-screen gap-2
-  max-sm:grid-cols-3 overflow-hidden max-sm:{mobile = true}">
+  <div class="grid grid-flow-col grid-cols-4 w-screen h-screen gap-2 overflow-hidden
+              max-sm:grid-cols-3 max-sm:gap-0">
     {#each images as image}
       {#if init}
         <div  class={image.img + bg_class}
-              transition:slide ={{direction: (image.direction), delay: (image.delay), easing: quartOut, duration: duration}}
-        >
+              transition:slide ={{direction: (image.direction), delay: (image.delay), easing: quartOut, duration: duration}}>
           <div class={image.bg_color + " h-full w-full opacity-25"}/>
         </div>
       {/if}

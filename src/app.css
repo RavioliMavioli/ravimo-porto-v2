@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --dark-color: #242b39bb;
+  --h1-size:56px;
+  --h2-size:32px;
+  --h3-size:26px;
+  --p1-size:20px;
+  --p2-size:16px;
+  --p3-size:12px;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -11,26 +21,92 @@ html {
 }
 
 h1 {
-  font-size: 56px;
+  font-size: var(--h1-size);
   font-weight: bold;
 }
 
 h2 {
-  font-size: 32px;
+  font-size: var(--h2-size);
   font-weight: bold;
 }
 
-p2 {
-  font-size: 16px;
-  font-weight: normal;
+h3 {
+  font-size: var(--h3-size);
+  font-weight: bold;
 }
 
 p1 {
-  font-size: 20px;
+  font-size: var(--p1-size);
   font-weight: normal;
 }
+
+p2 {
+  font-size: var(--p2-size);
+  font-weight: normal;
+}
+
+p3 {
+  font-size: var(--p3-size);
+  font-weight: normal;
+}
+
+.border-top-r{
+  position:absolute;
+  top:9px;
+  left:9px;
+  height:100px;
+  width:100px;
+  background-color:white;
+  border:1px solid red;
+}
+
+
+@media (max-width: 2000px) {
+  :root {
+    --h1-size:56px;
+    --h2-size:32px;
+    --h3-size:26px;
+    --p1-size:20px;
+    --p2-size:16px;
+    --p3-size:12px;
+  }
+}
+
+@media (max-width: 1280px) {
+  :root {
+    --h1-size:46px;
+    --h2-size:28px;
+    --h3-size:24px;
+    --p1-size:18px;
+    --p2-size:14px;
+    --p3-size:10px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --h1-size:40px;
+    --h2-size:24px;
+    --h3-size:20px;
+    --p1-size:16px;
+    --p2-size:12px;
+    --p3-size:8px;
+  }
+}
+
 @layer components{
+
+  .flex-middle{
+    @apply flex items-center justify-center align-middle w-full h-full;
+  }
+  .solid-deafult{
+    @apply bg-[--dark-color];
+  }
   .translucent{
-    @apply bg-[#1c1e2a6e] backdrop-blur-2xl shadow-2xl;
+    @apply bg-[--dark-color] backdrop-blur-2xl shadow-2xl;
+  }
+  
+  .translucent-round{
+    @apply bg-[--dark-color] backdrop-blur-2xl shadow-2xl rounded-3xl;
   }
 }
