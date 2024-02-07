@@ -73,11 +73,14 @@
                       max-lg:mx-10 max-lg:my-10">
               <!--First Line-->
               <LinedTitle title="Ravimo"/>
-              <p1>
-                Hello! I am Ravimo, an illustrator,
-                front end developer, game developer, and open-source enthusiast.
-                Welcome to my web page!
-              </p1>
+              <!--Introduction-->
+              <div class="mx-[1rem]">
+                <p1>
+                  Hello! I am Ravimo, an illustrator,
+                  front end developer, game developer, and open-source enthusiast.
+                  Welcome to my web page!
+                </p1>
+              </div>
               <!--Second Line-->
               <LinedTitle/>
               <!--Links list-->
@@ -104,13 +107,13 @@
 
       <!-- White window -->
       <div class="absolute top-0 opacity-0 opacity-animate bg-white translucent h-full w-full max-sm:w-[90%] rounded-3xl pointer-events-none"/>
-      <!-- Tab -->
+      <!-- Window Menu -->
       <div class="absolute w-[95%] h-6 top-4">
         <div class="relative flex-middle justify-start gap-2">
           <i class="fa-solid fa-circle text-xl text-red-400"></i>
           <i class="fa-solid fa-circle text-xl text-green-300"></i>
           <i class="fa-solid fa-circle text-xl text-yellow-200"></i>
-          <div class="bg-white h-[1px] w-full opacity-30"/>
+          <div class="bg-white h-[2px] w-full opacity-30"/>
         </div>
       </div>
       

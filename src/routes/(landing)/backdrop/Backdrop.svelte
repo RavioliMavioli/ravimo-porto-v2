@@ -7,7 +7,8 @@
   export var intro_ended = false
   var init, anim_finished = false
   var backdrop, opacity = null
-  
+  var current_finished_anim = 0
+
   const duration = 500
   const total_duration = 1000
   const bg_class = " bg-cover bg-center bg-repeat"
@@ -35,8 +36,15 @@
 
   // Somehow the animation won't execute when not inside the #if block
   setTimeout(() => {init = true}, 1)
-  setTimeout(() => {intro_ended = true}, total_duration * 1.5)
-  setTimeout(() => {anim_finished = true}, total_duration * 2.0)
+
+  function set_anim_state() {
+    current_finished_anim += 1
+    console.log("ASDASD")
+    if (current_finished_anim === 4){
+      intro_ended = true
+      anim_finished = true
+    }
+  }
 
 	$: {
 		if(backdrop) {
@@ -51,7 +59,6 @@
       if (anim_finished){
         opacity.classList.add('opacity-30')
       }
-    
 		}
 	}
 
@@ -62,8 +69,10 @@
               max-sm:grid-cols-3 max-sm:gap-0">
     {#each images as image}
       {#if init}
-        <div  class={image.img + bg_class}
-              transition:slide ={{direction: (image.direction), delay: (image.delay), easing: quartOut, duration: duration}}>
+        <div class={image.img + bg_class}
+          transition:slide = {{direction: (image.direction), delay: (image.delay), easing: quartOut, duration: duration}}
+          on:introend = {()=> (set_anim_state())}>
+
           <div class={image.bg_color + " h-full w-full opacity-25"}/>
         </div>
       {/if}
