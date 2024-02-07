@@ -106,7 +106,7 @@
       <!----------------------------------- Window Decoration Section ----------------------------------->
 
       <!-- White window -->
-      <div class="absolute top-0 opacity-0 opacity-animate bg-white translucent h-full w-full max-sm:w-[90%] rounded-3xl pointer-events-none"/>
+      <div class="absolute top-0 opacity-0 card-opacity-animate bg-white translucent h-full w-full max-sm:w-[90%] rounded-3xl pointer-events-none"/>
       <!-- Window Menu -->
       <div class="absolute w-[95%] h-6 top-4">
         <div class="relative flex-middle justify-start gap-2">
@@ -123,7 +123,7 @@
 
 <style>
 
-  .opacity-animate{
+  .card-opacity-animate{
     animation-name: opacity;
     animation-duration: 1s;
   }

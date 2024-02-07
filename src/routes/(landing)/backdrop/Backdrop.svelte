@@ -6,12 +6,11 @@
 
   export var intro_ended = false
   var init, anim_finished = false
-  var backdrop, opacity = null
+  var multiply_opacity, b_container = null
   var current_finished_anim = 0
 
-  const duration = 500
+  const anim_duration = 500
   const total_duration = 1000
-  const bg_class = " bg-cover bg-center bg-repeat"
   const images = [
 
     {img: " bg-backdrop2",
@@ -33,13 +32,13 @@
     delay: total_duration / 1,
     direction: "bottom"}
   ]
-
-  // Somehow the animation won't execute when not inside the #if block
-  setTimeout(() => {init = true}, 1)
+  // Somehow the animation doesn't play when not init
+  setTimeout(() => {
+    init = true
+  }, 1)
 
   function set_anim_state() {
     current_finished_anim += 1
-    console.log("ASDASD")
     if (current_finished_anim === 4){
       intro_ended = true
       anim_finished = true
@@ -47,53 +46,56 @@
   }
 
 	$: {
-		if(backdrop) {
-      if (init){
-			  backdrop.classList.add('scale-anim')
-      }
-		}
-    if(opacity) {
+    if (init && b_container){
+      b_container.classList.add("scale-anim")
+    }
+    if(multiply_opacity) {
       if (intro_ended){
-			  opacity.classList.add('opacity-animate', 'bg-black')
+			  multiply_opacity.classList.add('opacity-animate')
+        multiply_opacity.classList.add('bg-black')
       }
       if (anim_finished){
-        opacity.classList.add('opacity-30')
+        multiply_opacity.classList.add('opacity-30')
       }
 		}
 	}
 
 </script>
 
-<div class="fixed flex justify-center items-center overflow-hidden" bind:this={backdrop}>
+<div class="fixed flex justify-center items-center overflow-hidden" bind:this={b_container}>
   <div class="grid grid-flow-col grid-cols-4 w-screen h-screen gap-2 overflow-hidden
               max-sm:grid-cols-3 max-sm:gap-0">
+    
     {#each images as image}
       {#if init}
-        <div class={image.img + bg_class}
-          transition:slide = {{direction: (image.direction), delay: (image.delay), easing: quartOut, duration: duration}}
+        <div class={image.img + " bg-cover bg-center bg-repeat"}
+          transition:slide = {{direction: (image.direction), delay: (image.delay), easing: quartOut, duration: anim_duration}}
           on:introend = {()=> (set_anim_state())}>
 
           <div class={image.bg_color + " h-full w-full opacity-25"}/>
         </div>
       {/if}
     {/each}
+    
   </div>
-  <div class="absolute w-full h-full" bind:this={opacity}/>
+  <div class="absolute w-full h-full" bind:this={multiply_opacity}/>
 </div>
 
 <style>
-  .opacity-animate {
+  /* Svelte doesn't compile these class without :global() lmao */
+  :global(.opacity-animate) {
     animation-name: opacity-anim;
     animation-duration: 0.5s;
+    animation-timing-function: linear;
   }
-  .scale-anim {
-    animation-name: card;
+  :global(.scale-anim) {
+    animation-name: bscale;
     animation-duration: 2.0s;
     animation-timing-function: ease-in-out;
     
   }
 
-  @keyframes card {
+  @keyframes bscale {
     0% {
       scale: 140%;
       animation-timing-function: ease-out;
