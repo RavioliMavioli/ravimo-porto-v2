@@ -2,6 +2,8 @@
   import acchan from "../../../assets/img/acchan.png"
   import QuarterCircle from "../../../lib/circularbar.svelte"
   import LinedTitle from "../../../lib/lined_title.svelte"
+  import {nav_list, links} from "../../../lib/nav_and_links.svelte"
+
   import { tweened } from 'svelte/motion'
   import { quadOut } from 'svelte/easing'
 
@@ -14,21 +16,6 @@
     easing: quadOut
   })
 
-  const nav_list = [
-    {text: "Home", link:"", icon: "fa-house"},
-    {text: "About", link:"", icon: "fa-address-card"},
-    {text: "Portfolio", link:"", icon: "fa-image"},
-    {text: "Blog", link:"", icon: "fa-address-book"},
-  ]
-
-  const links = [
-    {link: "www.google.com", icon:"fa-brands fa-instagram", name:"Instagram"},
-    {link: "www.google.com", icon:"fa-brands fa-x-twitter", name:"Twitter"},
-    {link: "www.google.com", icon:"fa-brands fa-github", name:"Github"},
-    {link: "www.google.com", icon:"fa-brands fa-pixiv", name:"Pixiv"},
-    {link: "www.google.com", icon:"fa-brands fa-square-youtube", name:"Youtube"}
-  ]
-  
   $: {
     if (intro_ended){
       setTimeout(()=> {
@@ -50,7 +37,7 @@
                 3xl:min-w-[40%] 3xl:min-h-[50%]
                 max-xl:max-w-[80%]
                 max-md:max-w-[90%]">
-        
+
         <!---------------------- Upper Section ---------------------->
         <div class="flex-middle items-start gap-2 px-10 mt-20
                     max-lg:flex-col max-lg:items-center">
@@ -94,12 +81,12 @@
               <!--Second Line-->
               <LinedTitle/>
               <!--Links list-->
-              <div class="flex-middle flex-row">
+              <div class="flex-middle flex-row gap-2 max-sm:gap-0">
                 {#each links as link}
-                  <a href={link.link} class="group hover:bg-white">
+                  <a href={link.link} target="_blank" class="group hover:bg-white">
                     <div class="flex-middle group-hover:bg-white">
                       <i class={link.icon + " text-3xl px-2 group-hover:text-black"}/>  
-                      <p3 class="absolute text-white hidden group-hover:translate-y-9 group-hover:block">{link.name}</p3>
+                      <p3 class="absolute text-transparent duration-200 translate-y-5 group-hover:translate-y-9 group-hover:text-white">{link.name}</p3>
                     </div>
                   </a>
                 {/each}
@@ -107,8 +94,10 @@
           </div>
         </div>
         <!---------------------- Mid Section ---------------------->
-        <div class="flex-middle h-10">
+        <div class="flex-middle items-start gap-2 px-10 mt-5">
+          <div class="h-10 w-full">
 
+          </div>
         </div>
 
       <!----------------------------------- Window Decoration Section ----------------------------------->
