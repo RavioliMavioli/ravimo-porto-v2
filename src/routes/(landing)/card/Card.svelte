@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from "svelte"
   import acchan from "../../../assets/img/acchan.png"
   import QuarterCircle from "../../../lib/circularbar.svelte"
   import LinedTitle from "../../../lib/lined_title.svelte"
@@ -18,14 +17,11 @@
   })
 
   $: {
-    onMount(() => {
       if (intro_ended){
         setTimeout(()=> {
           value.set(75.0)
         }, 300)
       }
-    })
-
   }
     
 
