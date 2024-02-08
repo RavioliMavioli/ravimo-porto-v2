@@ -8,7 +8,7 @@
   import { quadOut } from 'svelte/easing'
 
   export var intro_ended = false
-  intro_ended = true
+  //intro_ended = true
   
   var window = null
   var value = tweened(0.0, {
