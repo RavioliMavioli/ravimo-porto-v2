@@ -128,4 +128,14 @@ p3 {
 .corner-border-r {
   border-right: 2px solid white;
   @apply right-0 rounded-tr-xl
+
+}
+.border-l-only{
+  position: absolute;
+  display: block;
+  content: "";
+  width: 20px;
+  height: 20px;
+  border-left: 2px solid white;
+  @apply left-0
 }

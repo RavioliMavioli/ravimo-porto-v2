@@ -10,7 +10,6 @@
   export var intro_ended = false
   //intro_ended = true
   
-  var window = null
   var value = tweened(0.0, {
     duration: 2000,
     easing: quadOut
@@ -97,39 +96,45 @@
           </div>
         </div>
         <!---------------------- Mid Section ---------------------->
-        <div class="relative flex-middle flex-col gap-2 px-10 mt-10">
+        <div class="relative flex-middle flex-col gap-2 px-10 mt-10
+                    max:xl=mt-5
+                    max-lg:mt-0">
           <!---------------------- Mid Line ---------------------->
           <div class="flex-middle items-start opacity-30">
             <!-- Wanky Rounded Left -->
             <div class="corner-border-l translate-x-5 translate-y-[9px] rounded-tl-xl"/>
-            <div class="corner-border-l translate-x-5 translate-y-[28px] -scale-y-100 rounded-tl-xl"/>
+            <div class="border-l-only translate-x-5 translate-y-[28px]"/>
+            <div class="corner-border-l translate-x-5 translate-y-[48px] -scale-y-100 rounded-tl-xl"/>
             <!-- Line Section -->
             <div class="flex-middle">
               <!-- Start -->
               <div class="flex flex-row text-black">
-                <div class="bg-white pl-2">
+                <div class="bg-white pl-2 flex-middle">
                   <p2 class="mx-2">$Navigation~</p2>
                 </div>
-                <div class="border-t-[10px] border-t-transparent border-l-[15px] border-l-white border-b-[10px] border-b-transparent"/>
+                <div class="border-t-[10px] border-b-[10px] border-t-transparent border-l-[15px] border-l-white border-b-transparent
+                            max-sm:border-t-[8px] max-sm:border-b-[8px]"/>
               </div>
               <!-- Line -->
               <div class="h-[2px] w-full bg-white"/>
               <!-- End -->
               <div class="flex flex-row text-black">
-                <div class="border-t-[10px] border-t-transparent border-r-[15px] border-r-white border-b-[10px] border-b-transparent"/>
-                <div class="bg-white pr-2">
+                <div class="border-t-[10px] border-b-[10px] border-t-transparent border-r-[15px] border-r-white border-b-transparent
+                            max-sm:border-t-[8px] max-sm:border-b-[8px]"/>
+                <div class="bg-white pr-2 flex-middle">
                   <p2 class="mx-2">0s</p2>
                 </div>
               </div>  
             </div>
           </div>
           <!---------------------- Nav Section ---------------------->
-          <div class="flex-middle gap-3">
+          <div class="flex-middle gap-3 mt-3
+                      max-md:gap-2 max-md:mt-2">
             {#each nav_list as nav}
-              <a href={nav.link} class="hover:bg-white hover:text-black py-1 px-5
+              <a href={nav.link} class="hover:bg-white hover:text-black py-1 px-5 border-2 border-white border-opacity-30
                                         max-md:px-2
-                                        max-sm:px-0">
-                <p1>{"> " + nav.text}</p1>
+                                        max-sm:px-1">
+                <p1>{nav.text}</p1>
               </a>
             {/each}
           </div>
