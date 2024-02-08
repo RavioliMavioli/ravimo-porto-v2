@@ -77,12 +77,14 @@
     
     {#each images as image}
       {#if page_loaded}
-        <div class={image.img + " bg-cover bg-center bg-repeat"}
+        <div class={image.img + " relative bg-cover bg-center bg-repeat"}
           transition:slide = {{direction: (image.direction), delay: (image.delay), easing: quartOut, duration: anim_duration}}
           on:introend = {()=> (set_anim_state())}>
-          <div class={image.bg_color + " h-full w-full opacity-25"}/>
+
+          <div class={image.bg_color + " relative h-full w-full opacity-25"}/>
+
           {#if !darkmode}
-            <div class={image.img_light + " bg-cover bg-center bg-repeat w-full h-full mt-[-100vh]"}
+            <div class={image.img_light + " relative bg-cover bg-center bg-repeat w-full h-full mt-[-100vh]"}
             transition:slide = {{direction: (image.direction), delay: (image.delay/2), easing: quartOut, duration: anim_duration}}>
               
             </div>
