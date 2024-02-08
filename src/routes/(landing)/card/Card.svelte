@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from "svelte"
   import acchan from "../../../assets/img/acchan.png"
   import QuarterCircle from "../../../lib/circularbar.svelte"
   import LinedTitle from "../../../lib/lined_title.svelte"
@@ -9,7 +10,7 @@
   import { quadOut } from 'svelte/easing'
 
   export var intro_ended = false
-  intro_ended = true
+  //intro_ended = true
   
   var value = tweened(0.0, {
     duration: 2000,
@@ -17,11 +18,14 @@
   })
 
   $: {
-    if (intro_ended){
-      setTimeout(()=> {
-        value.set(75.0)
-      }, 300)
-    }
+    onMount(() => {
+      if (intro_ended){
+        setTimeout(()=> {
+          value.set(75.0)
+        }, 300)
+      }
+    })
+
   }
     
 
@@ -118,6 +122,9 @@
           </div>
           <div class="flex-middle min-h-10"/>
         </div>
+        <!---------------------- Bottom Section ---------------------->
+
+
       <!----------------------------------- Window Decoration Section ----------------------------------->
 
       <!-- White window -->
