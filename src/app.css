@@ -4,6 +4,16 @@
 
 :root {
   --dark-color: #242b39bb;
+
+  --theme-nord: #4c566a;
+  --theme-red: #bf616a;
+  --theme-green: #a3be8c;
+  --theme-yellow: #ebcb8b;
+  --theme-blue: #5e81ac;
+  --theme-purple: #b48ead;
+  --theme-cyan: #81a1c1;
+  --theme-white: #eceff4;
+
   --h1-size:56px;
   --h2-size:32px;
   --h3-size:26px;
@@ -18,6 +28,7 @@ html {
 
 * {
   font-family: 'Noto Sans', sans-serif;
+  @apply text-[--theme-white]
 }
 
 h1 {
@@ -56,7 +67,7 @@ p3 {
   left:9px;
   height:100px;
   width:100px;
-  background-color:white;
+  background-color:var(--theme-white);
   border:1px solid red;
 }
 
@@ -111,23 +122,30 @@ p3 {
   }
 }
 
-.corner-border-l, .corner-border-r{
+.corner-border-l, .corner-border-r, .corner-border-l-nord{
   position: absolute;
   display: block;
   content: "";
   width: 20px;
   height: 20px;
-  border-top: 2px solid white;
+  border-top: 2px solid var(--theme-white);
 }
 
 .corner-border-l {
-  border-left: 2px solid white;
+  border-left: 2px solid var(--theme-white);
   @apply left-0 rounded-tl-xl
 }
 
 .corner-border-r {
-  border-right: 2px solid white;
+  border-right: 2px solid var(--theme-white);
   @apply right-0 rounded-tr-xl
+
+}
+
+.corner-border-l-nord {
+  border-top: 2px solid var(--theme-nord);
+  border-left: 2px solid var(--theme-nord);
+  @apply left-0 rounded-tl-xl
 
 }
 .border-l-only{
@@ -136,6 +154,6 @@ p3 {
   content: "";
   width: 20px;
   height: 20px;
-  border-left: 2px solid white;
+  border-left: 2px solid var(--theme-nord);
   @apply left-0
 }
