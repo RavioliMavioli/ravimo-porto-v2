@@ -2,7 +2,7 @@
   import acchan from "../../../assets/img/acchan.png"
   import QuarterCircle from "../../../lib/circularbar.svelte"
   import LinedTitle from "../../../lib/lined_title.svelte"
-  import {nav_list, links} from "../../../lib/nav_and_links.svelte"
+  import {nav_list, links, title_bar} from "../../../lib/nav_and_links.svelte"
 
   import { tweened } from 'svelte/motion'
   import { quadOut } from 'svelte/easing'
@@ -89,7 +89,7 @@
                   <a href={link.link} target="_blank" class="group hover:bg-white">
                     <div class="flex-middle group-hover:bg-white">
                       <i class={link.icon + " text-3xl px-2 group-hover:text-black"}/>  
-                      <p3 class="absolute text-transparent duration-200 translate-y-5 group-hover:translate-y-9 group-hover:text-white">{link.name}</p3>
+                      <p3 class="absolute text-transparent duration-200 translate-y-6 group-hover:translate-y-9 group-hover:text-white">{link.name}</p3>
                     </div>
                   </a>
                 {/each}
@@ -110,9 +110,12 @@
       <!-- Window Menu -->
       <div class="absolute w-[95%] h-6 top-4">
         <div class="relative flex-middle justify-start gap-2">
-          <i class="fa-solid fa-circle text-xl text-red-400"></i>
-          <i class="fa-solid fa-circle text-xl text-green-300"></i>
-          <i class="fa-solid fa-circle text-xl text-yellow-200"></i>
+          {#each title_bar as bar}
+            <i class="fa-solid fa-circle text-xl
+                      {bar.color} 
+                      max-lg:text-lg
+                      max-md:text-sm"></i>
+          {/each}
           <div class="bg-white h-[2px] w-full opacity-30"/>
         </div>
       </div>

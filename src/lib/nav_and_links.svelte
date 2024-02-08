@@ -1,4 +1,10 @@
 <script context="module">
+  export const title_bar = [
+    {color: "text-red-400"},
+    {color: "text-green-300"},
+    {color: "text-yellow-200"},
+  ]
+
   export const nav_list = [
     {text: "Home", link:"", icon: "fa-house"},
     {text: "About", link:"", icon: "fa-address-card"},

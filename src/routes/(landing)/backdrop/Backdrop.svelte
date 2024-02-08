@@ -2,8 +2,7 @@
   import { onMount, } from "svelte"
   import { quartOut} from "svelte/easing"
   import { slide} from "svelte-legos"
-  import { disablePreload } from 'svelte-disable-preload'
-
+  import { useLazyImage as lazyImage, useLazyImage } from "svelte-lazy-image"
 
   export var intro_ended = false
   var page_loaded, anim_finished = false
@@ -112,13 +111,13 @@
       scale: 100%;
     }
   }
-    @keyframes opacity-anim{
-      0% {
-        opacity: 0;
-      }
-      100%{
-        opacity: 0.3;
-      }
+  @keyframes opacity-anim{
+    0% {
+      opacity: 0;
+    }
+    100%{
+      opacity: 0.3;
+    }
   }
   
 </style>
