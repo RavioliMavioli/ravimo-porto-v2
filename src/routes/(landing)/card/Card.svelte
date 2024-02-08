@@ -129,7 +129,7 @@
           </div>
           <!---------------------- Nav Section ---------------------->
           <div class="flex-middle gap-3 mt-3
-                      max-md:gap-2 max-md:mt-2">
+                      max-md:gap-1 max-md:mt-2">
             {#each nav_list as nav}
               <a href={nav.link} class="hover:bg-white hover:text-black py-1 px-5 border-2 border-white border-opacity-30
                                         max-md:px-2
@@ -145,7 +145,8 @@
       <!-- White window -->
       <div class="absolute top-0 opacity-0 card-opacity-animate bg-white translucent h-full w-full max-sm:w-[90%] rounded-3xl pointer-events-none"/>
       <!-- Window Menu -->
-      <div class="absolute w-[95%] h-6 top-4">
+      <div class="absolute w-[95%] h-6 top-4
+                  max-sm:top-2 max-sm:w-[93%]">
         <div class="relative flex-middle justify-start gap-2">
           {#each title_bar as bar}
             <i class="fa-solid fa-circle text-xl
