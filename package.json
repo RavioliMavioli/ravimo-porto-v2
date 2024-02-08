@@ -29,7 +29,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"svelte-lazy-image": "^0.5.1",
 		"svelte-legos": "^0.2.2"
 	}
 }

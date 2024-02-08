@@ -112,20 +112,20 @@ p3 {
 }
 
 .corner-border-l, .corner-border-r{
+  position: absolute;
   display: block;
   content: "";
   width: 20px;
   height: 20px;
-  position: absolute;
   border-top: 2px solid white;
 }
 
 .corner-border-l {
   border-left: 2px solid white;
-  @apply left-0 translate-y-[9px] rounded-tl-xl
+  @apply left-0 rounded-tl-xl
 }
 
 .corner-border-r {
   border-right: 2px solid white;
-  @apply right-0 translate-y-[9px] rounded-tr-xl
+  @apply right-0 rounded-tr-xl
 }

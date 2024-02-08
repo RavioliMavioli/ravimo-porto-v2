@@ -2,7 +2,6 @@
   import { onMount, } from "svelte"
   import { quartOut} from "svelte/easing"
   import { slide} from "svelte-legos"
-  import { useLazyImage as lazyImage, useLazyImage } from "svelte-lazy-image"
 
   export var intro_ended = false
   var page_loaded, anim_finished = false
