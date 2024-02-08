@@ -13,7 +13,7 @@
     {name:"theme-black", dark: "#2e3440", light: "#eceff4"}
 
   ] 
-  export var darkmode = true
+
   export const set_darkmode = (bool) => {
     if (bool){
       colors.forEach(col => {
@@ -25,7 +25,6 @@
         document.documentElement.style.setProperty(`--${col.name}`, col.light)
       })
     }
-    darkmode = bool
   }
 
 </script>

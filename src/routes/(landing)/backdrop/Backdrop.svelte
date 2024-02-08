@@ -3,7 +3,9 @@
   import { quartOut} from "svelte/easing"
   import { slide} from "svelte-legos"
 
+  export var darkmode = true
   export var intro_ended = false
+
   var page_loaded, anim_finished = false
   var multiply_opacity, b_container = null
   var current_finished_anim = 0
@@ -12,24 +14,28 @@
   const total_duration = 1000
   const images = [
 
-    {img: " bg-backdrop2",
-    bg_color: "bg-gradient-to-br from-cyan-500 to-sky-900",
-    delay: total_duration * 0,
-    direction: "top"},
+    { img: " bg-backdrop2",
+      img_light: " bg-light1",
+      bg_color: "bg-gradient-to-br from-cyan-500 to-sky-900",
+      delay: total_duration * 0,
+      direction: "top"},
 
-    {img: " bg-backdrop1",
-    bg_color: "bg-gradient-to-b from-sky-500 to-indigo-900",
-    delay: total_duration / 3,
-    direction: "bottom"},
+    { img: " bg-backdrop1",
+      img_light: " bg-light2",
+      bg_color: "bg-gradient-to-b from-sky-500 to-indigo-900",
+      delay: total_duration / 3,
+      direction: "bottom"},
 
-    {img: " bg-backdrop4",
-    bg_color: "bg-gradient-to-bl from-blue-500 to-violet-900",
-    delay: total_duration / 1.5, direction: "top"},
+    { img: " bg-backdrop4",
+      img_light: " bg-light3",
+      bg_color: "bg-gradient-to-bl from-blue-500 to-violet-900",
+      delay: total_duration / 1.5, direction: "top"},
 
-    {img: " bg-backdrop3",
-    bg_color: "bg-gradient-to-bl from-indigo-600 to-purple-900",
-    delay: total_duration / 1,
-    direction: "bottom"}
+    { img: " bg-backdrop3",
+      img_light: " bg-light4",
+      bg_color: "bg-gradient-to-bl from-indigo-600 to-purple-900",
+      delay: total_duration / 1,
+      direction: "bottom"}
   ]
 
   onMount(() => {
@@ -62,6 +68,7 @@
 		}
 	}
 
+
 </script>
 
 <div class="fixed flex justify-center items-center overflow-hidden" bind:this={b_container}>
@@ -73,8 +80,13 @@
         <div class={image.img + " bg-cover bg-center bg-repeat"}
           transition:slide = {{direction: (image.direction), delay: (image.delay), easing: quartOut, duration: anim_duration}}
           on:introend = {()=> (set_anim_state())}>
-
           <div class={image.bg_color + " h-full w-full opacity-25"}/>
+          {#if !darkmode}
+            <div class={image.img_light + " bg-cover bg-center bg-repeat w-full h-full mt-[-100vh]"}
+            transition:slide = {{direction: (image.direction), delay: (image.delay/2), easing: quartOut, duration: anim_duration}}>
+              
+            </div>
+          {/if}
         </div>
       {/if}
     {/each}

@@ -4,13 +4,15 @@
   import LinedTitle from "../../../lib/lined_title.svelte"
   import Tide from "../../../lib/tide.svelte"
   import { nav_list, links, title_bar } from "../../../lib/nav_and_links.svelte"
-  import { darkmode, set_darkmode } from "../../../lib/color_manager.svelte"
+  import { set_darkmode } from "../../../lib/color_manager.svelte"
 
   import { tweened } from 'svelte/motion'
   import { quadOut } from 'svelte/easing'
 
+  export var darkmode = true
   export var intro_ended = false
   //intro_ended = true
+
   const darkmode_text = {text: "Dark", icon: "fa-moon"}
   var value = tweened(0.0, {
     duration: 2000,
@@ -139,7 +141,7 @@
           <!-- Dark Mode Button -->
           <button class="absolute left-0 flex-middle flex-row w-auto border-[--theme-nord] border-2 rounded-full group
                          hover:border-[--theme-white] hover:bg-[--theme-white] hover:glow"
-                         on:click={() => {set_darkmode(!darkmode); change_darkmode_text()}}>
+                         on:click={() => {darkmode = !darkmode; set_darkmode(darkmode); change_darkmode_text()}}>
             <p2 class="text-[--theme-white] p-1 ml-2 group-hover:text-[--theme-black]">{darkmode_text.text}</p2>
             <i class="{darkmode_text.icon} fa-solid text-sm p-1 mr-2 group-hover:text-[--theme-black]"/>
           </button>
