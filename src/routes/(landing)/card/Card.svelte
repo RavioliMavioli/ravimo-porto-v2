@@ -153,7 +153,6 @@
                       max-lg:text-lg
                       max-md:text-sm"></i>
           {/each}
-          <div class="bg-white h-[2px] w-full opacity-30"/>
         </div>
       </div>
       
