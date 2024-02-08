@@ -3,25 +3,31 @@
   import QuarterCircle from "../../../lib/circularbar.svelte"
   import LinedTitle from "../../../lib/lined_title.svelte"
   import Tide from "../../../lib/tide.svelte"
-  import {nav_list, links, title_bar} from "../../../lib/nav_and_links.svelte"
+  import { nav_list, links, title_bar } from "../../../lib/nav_and_links.svelte"
+  import { darkmode, set_darkmode } from "../../../lib/color_manager.svelte"
 
   import { tweened } from 'svelte/motion'
   import { quadOut } from 'svelte/easing'
 
   export var intro_ended = false
-  //intro_ended = true
-  
+  intro_ended = true
+  const darkmode_text = {text: "Dark", icon: "fa-moon"}
   var value = tweened(0.0, {
     duration: 2000,
     easing: quadOut
   })
+  
+  const change_darkmode_text = () => {
+    darkmode_text.text = darkmode ? "Dark" : "Light"
+    darkmode_text.icon = darkmode ? "fa-moon" : "fa-sun"
+  }
 
   $: {
-      if (intro_ended){
-        setTimeout(()=> {
-          value.set(75.0)
+    if (intro_ended){
+      setTimeout(()=> {
+        value.set(75.0)
         }, 300)
-      }
+    }
   }
     
 
@@ -39,7 +45,7 @@
                 max-md:max-w-[90%]">
 
         <!---------------------- Upper Section ---------------------->
-        <div class="flex-middle items-start gap-2 px-10 mt-20
+        <div class="flex-middle gap-2 px-10 mt-20
                     max-lg:flex-col max-lg:items-center">
 
           <!-- Arch-chan Container -->
@@ -86,9 +92,9 @@
               <!-- Links list -->
               <div class="flex-middle flex-row gap-2 max-sm:gap-0">
                 {#each links as link}
-                  <a href={link.link} target="_blank" class="group hover:bg-[--theme-white]">
+                  <a href={link.link} target="_blank" class="group hover:bg-[--theme-white] hover:glow">
                     <div class="flex-middle group-hover:bg-[--theme-white]">
-                      <i class={link.icon + " text-3xl px-2 group-hover:text-black"}/>  
+                      <i class={link.icon + " text-3xl px-2 group-hover:text-[--theme-black]"}/>  
                       <p3 class=" absolute translate-y-6 text-transparent duration-200 group-hover:text-[--theme-white]
                                   group-hover:translate-y-9
                                   max-sm:group-hover:translate-y-7">{link.name}</p3>
@@ -105,15 +111,15 @@
           <!---------------------- Mid Line ---------------------->
           <Tide />
           <!---------------------- Nav Section ---------------------->
-          <div class="flex-middle gap-3 mt-3
-                      max-md:mt-2">
+          <div class="flex-middle gap-3 my-2">
             {#each nav_list as nav}
-              <a href={nav.link} class="border-[--theme-nord] py-1 px-5 border-2 rounded-full group
-                                        hover:bg-[--theme-white] hover:border-[--theme-white]
-                                        max-md:px-2
-                                        max-sm:px-1">
-                <p1 class="group-hover:text-black">{nav.text}</p1>
-              </a>
+              <button href={nav.link} class=" border-[--theme-nord] py-2 px-8 border-2 rounded-full group
+                                              hover:bg-[--theme-white] hover:border-[--theme-white] hover:glow
+                                              max-xl:px-5
+                                              max-md:px-2
+                                              max-sm:px-1">
+                <p1 class="group-hover:text-[--theme-black]">{nav.text}</p1>
+              </button>
             {/each}
           </div>
           <div class="flex-middle min-h-10"/>
@@ -121,25 +127,35 @@
         <!---------------------- Bottom Section ---------------------->
 
 
-      <!----------------------------------- Window Decoration Section ----------------------------------->
+      <!----------------------------------- Window Controls Section ----------------------------------->
 
-      <!-- White window -->
+      <!-- White window loading -->
       <div class="absolute top-0 opacity-0 card-opacity-animate bg-[--theme-white] translucent h-full w-full max-sm:w-[90%] rounded-3xl pointer-events-none"/>
-      <!-- Window Menu -->
+      <!-- Window Control Container -->
       <div class="absolute w-[95%] h-6 top-4
                   max-sm:top-2 max-sm:w-[93%]">
-        <div class="relative flex-middle justify-start gap-2">
-          {#each title_bar as bar}
-            <i class="fa-solid fa-circle text-xl
-                      {bar.color} 
-                      max-lg:text-lg
-                      max-md:text-sm"></i>
-          {/each}
+        
+        <div class="relative flex-middle justify-end gap-2">
+          <!-- Dark Mode Button -->
+          <button class="absolute left-0 flex-middle flex-row w-auto border-[--theme-nord] border-2 rounded-full group
+                         hover:border-[--theme-white] hover:bg-[--theme-white] hover:glow"
+                         on:click={() => {set_darkmode(!darkmode); change_darkmode_text()}}>
+            <p2 class="text-[--theme-white] p-1 ml-2 group-hover:text-[--theme-black]">{darkmode_text.text}</p2>
+            <i class="{darkmode_text.icon} fa-solid text-sm p-1 mr-2 group-hover:text-[--theme-black]"/>
+          </button>
+          <!-- Window Control Buttons -->
+            {#each title_bar as bar}
+              <i class="fa-solid fa-circle text-xl
+                        {bar.color} 
+                        max-lg:text-lg
+                        max-md:text-sm"></i>
+            {/each}
         </div>
       </div>
-      
     </div>
+
   {/if}
+
 </div>
 
 <style>

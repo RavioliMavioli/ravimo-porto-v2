@@ -20,7 +20,8 @@
   <div class="flex-middle">
     <!-- Start -->
     <div class="flex flex-row text-[--theme-cyan]">
-      <div class="bg-[--theme-nord] pl-4 flex-middle">
+      <div class="bg-[--theme-nord] pl-3 flex-middle">
+        <i class={"fa-brands fa-linux text-[--theme-absolute-white] mr-5"}/>
         <i class={icon + " " + color}/>
         <p2 class={color + " mx-2 font-bold"}>{path}</p2>
       </div>
