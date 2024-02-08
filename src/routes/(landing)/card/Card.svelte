@@ -10,7 +10,7 @@
   import { quadOut } from 'svelte/easing'
 
   export var intro_ended = false
-  intro_ended = true
+  //intro_ended = true
   const darkmode_text = {text: "Dark", icon: "fa-moon"}
   var value = tweened(0.0, {
     duration: 2000,
