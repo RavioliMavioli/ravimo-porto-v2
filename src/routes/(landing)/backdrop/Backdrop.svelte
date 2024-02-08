@@ -1,11 +1,12 @@
 <script>
-
+  import { onMount, } from "svelte"
   import { quartOut} from "svelte/easing"
-  import { slide } from "svelte-legos"
+  import { slide} from "svelte-legos"
+  import { disablePreload } from 'svelte-disable-preload'
 
 
   export var intro_ended = false
-  var init, anim_finished = false
+  var page_loaded, anim_finished = false
   var multiply_opacity, b_container = null
   var current_finished_anim = 0
 
@@ -32,10 +33,13 @@
     delay: total_duration / 1,
     direction: "bottom"}
   ]
-  // Somehow the animation doesn't play when not init
-  setTimeout(() => {
-    init = true
-  }, 1)
+
+  onMount(() => {
+    // Chrome went apes when the delay is not set
+    setTimeout(() => {
+      page_loaded = true
+    }, 500)
+  })
 
   function set_anim_state() {
     current_finished_anim += 1
@@ -46,7 +50,7 @@
   }
 
 	$: {
-    if (init && b_container){
+    if (page_loaded && b_container){
       b_container.classList.add("scale-anim")
     }
     if(multiply_opacity) {
@@ -67,7 +71,7 @@
               max-sm:grid-cols-3 max-sm:gap-0">
     
     {#each images as image}
-      {#if init}
+      {#if page_loaded}
         <div class={image.img + " bg-cover bg-center bg-repeat"}
           transition:slide = {{direction: (image.direction), delay: (image.delay), easing: quartOut, duration: anim_duration}}
           on:introend = {()=> (set_anim_state())}>

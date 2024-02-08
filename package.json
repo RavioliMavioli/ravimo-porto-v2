@@ -29,6 +29,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"svelte-disable-preload": "^0.0.2",
 		"svelte-legos": "^0.2.2"
 	}
 }
