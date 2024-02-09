@@ -162,5 +162,5 @@ p3 {
 }
 
 .maximize{
-  @apply min-h-full max-h-full min-w-full rounded-none
+  @apply min-h-full max-h-full min-w-[100%] rounded-none
 }

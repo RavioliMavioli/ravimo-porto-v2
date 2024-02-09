@@ -53,7 +53,7 @@
   {#if intro_ended}
     <!-- Window -->
     <div class="translucent-round anim relative flex justify-start items-center flex-col duration-200
-                min-h-[70%] max-w-[60%] max-h-[70%]
+                min-h-[70%] max-w-[60%] max-h-[70%] min-w-1
                 3xl:min-w-[40%] 3xl:min-h-[50%]
                 max-xl:max-w-[80%]
                 max-md:max-w-[90%]" bind:this={the_window}>
@@ -129,13 +129,15 @@
           <!---------------------- Nav Section ---------------------->
           <div class="flex-middle gap-3 my-2">
             {#each nav_list as nav}
-              <button href={nav.link} class=" border-[--theme-nord] py-2 px-8 border-2 rounded-full group
-                                              hover:bg-[--theme-white] hover:border-[--theme-white] hover:glow
-                                              max-xl:px-5
-                                              max-md:px-2
-                                              max-sm:px-1">
-                <p1 class="group-hover:text-[--theme-black]">{nav.text}</p1>
-              </button>
+              <a href={nav.link} target="_blank">
+                <button class=" border-[--theme-nord] py-2 px-8 border-2 rounded-full group
+                                                hover:bg-[--theme-white] hover:border-[--theme-white] hover:glow
+                                                max-xl:px-5
+                                                max-md:px-2
+                                                max-sm:px-1">
+                  <p1 class="group-hover:text-[--theme-black]">{nav.text}</p1>
+                </button>
+              </a>
             {/each}
           </div>
           <div class="flex-middle min-h-10"/>
@@ -165,7 +167,8 @@
                 <i class="fa-solid fa-circle text-xl
                           {bar.color} 
                           max-lg:text-lg
-                          max-md:text-sm"></i>
+                          max-md:text-sm
+                          hover:opacity-75"></i>
               </button>
             {/each}
         </div>

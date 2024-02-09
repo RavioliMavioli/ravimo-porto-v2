@@ -6,10 +6,10 @@
   ]
 
   export const nav_list = [
-    {text: "Home", link:"", icon: "fa-house"},
-    {text: "About", link:"", icon: "fa-address-card"},
-    {text: "Portfolio", link:"", icon: "fa-image"},
-    {text: "Contact", link:"", icon: "fa-address-book"},
+    {text: "Home", link:"https://raviolimavioli.github.io/", icon: "fa-house"},
+    {text: "About", link:"https://raviolimavioli.github.io/", icon: "fa-address-card"},
+    {text: "Portfolio", link:"https://raviolimavioli.github.io/", icon: "fa-image"},
+    {text: "Contact", link:"https://raviolimavioli.github.io/", icon: "fa-address-book"},
   ]
 
   export const links = [
