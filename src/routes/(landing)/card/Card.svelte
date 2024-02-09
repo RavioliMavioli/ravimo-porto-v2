@@ -11,7 +11,7 @@
 
   export var darkmode = true
   export var intro_ended = false
-  intro_ended = true
+  //intro_ended = true
 
   var is_maximized = false
   var is_minimized = false
@@ -58,7 +58,7 @@
                 max-xl:max-w-[80%]
                 max-md:max-w-[90%]" bind:this={the_window}>
       <!-- Window Container -->
-      <div class="relative no-scrollbar overflow-y-scroll mt-14 mb-6 h-auto w-auto
+      <div class="relative no-scrollbar overflow-y-scroll mt-14 mb-6 h-auto w-auto px-10
                   max-md:mt-10">
         <!---------------------- Upper Section ---------------------->
         <div class="flex-middle gap-2 px-10 mt-6
