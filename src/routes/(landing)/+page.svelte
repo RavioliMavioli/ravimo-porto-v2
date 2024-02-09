@@ -10,4 +10,6 @@
 </script>
 
 <Backdrop bind:intro_ended bind:darkmode/>
-<Card bind:intro_ended bind:darkmode/>
+<Card bind:intro_ended bind:darkmode />
+
+<svelte:window/>

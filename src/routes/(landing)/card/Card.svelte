@@ -11,7 +11,13 @@
 
   export var darkmode = true
   export var intro_ended = false
-  //intro_ended = true
+  intro_ended = true
+
+  var is_maximized = false
+  var is_minimized = false
+  var is_exited = false
+
+  var the_window = null
 
   const darkmode_text = {text: "Dark", icon: "fa-moon"}
   var value = tweened(0.0, {
@@ -31,23 +37,31 @@
         }, 300)
     }
   }
+
+  function maximize(bool){
+    is_maximized = bool
+    if (is_maximized) the_window.classList.add('maximize')
+    else the_window.classList.remove('maximize')
+  }
     
 
 </script>
 
 <!----------------------------------- Window Container ----------------------------------->
-<div class="absolute flex justify-center items-center top-0 left-0 h-screen w-screen">
+<div class="absolute flex justify-center items-center top-0 left-0 h-screen w-screen" >
   <!-- Check if backdrop animation is completed -->
   {#if intro_ended}
     <!-- Window -->
     <div class="translucent-round anim relative flex justify-start items-center flex-col duration-200
-                min-h-[70%] max-w-[60%]
+                min-h-[70%] max-w-[60%] max-h-[70%]
                 3xl:min-w-[40%] 3xl:min-h-[50%]
                 max-xl:max-w-[80%]
-                max-md:max-w-[90%]">
-
+                max-md:max-w-[90%]" bind:this={the_window}>
+      <!-- Window Container -->
+      <div class="relative no-scrollbar overflow-y-scroll mt-14 mb-6 h-auto w-auto
+                  max-md:mt-10">
         <!---------------------- Upper Section ---------------------->
-        <div class="flex-middle gap-2 px-10 mt-20
+        <div class="flex-middle gap-2 px-10 mt-6
                     max-lg:flex-col max-lg:items-center">
 
           <!-- Arch-chan Container -->
@@ -78,7 +92,7 @@
 
           <!-- Biodata -->
           <div class="flex-middle flex-col gap-5 ms-10 text-justify
-                      max-lg:mx-10 max-lg:my-10">
+                      max-lg:mx-10 max-lg:my-8">
               <!-- First Line -->
               <LinedTitle title="Ravimo"/>
               <!-- Introduction -->
@@ -127,15 +141,15 @@
           <div class="flex-middle min-h-10"/>
         </div>
         <!---------------------- Bottom Section ---------------------->
-
-
+        <div class="flex-middle w-full h-[1000px]"></div>
+      </div>
       <!----------------------------------- Window Controls Section ----------------------------------->
 
       <!-- White window loading -->
       <div class="absolute top-0 opacity-0 card-opacity-animate bg-[--theme-white] translucent h-full w-full max-sm:w-[90%] rounded-3xl pointer-events-none"/>
       <!-- Window Control Container -->
-      <div class="absolute w-[95%] h-6 top-4
-                  max-sm:top-2 max-sm:w-[93%]">
+      <div class="absolute w-[95%] h-6 top-4 overflow-y-hidden
+                  max-md:top-2 max-sm:w-[93%]">
         
         <div class="relative flex-middle justify-end gap-2">
           <!-- Dark Mode Button -->
@@ -147,10 +161,12 @@
           </button>
           <!-- Window Control Buttons -->
             {#each title_bar as bar}
-              <i class="fa-solid fa-circle text-xl
-                        {bar.color} 
-                        max-lg:text-lg
-                        max-md:text-sm"></i>
+              <button on:click={() => {maximize(!is_maximized)}}>
+                <i class="fa-solid fa-circle text-xl
+                          {bar.color} 
+                          max-lg:text-lg
+                          max-md:text-sm"></i>
+              </button>
             {/each}
         </div>
       </div>

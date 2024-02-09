@@ -150,3 +150,17 @@ p3 {
   border-left: 2px solid var(--theme-nord);
   @apply left-0
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.maximize{
+  @apply min-h-full max-h-full min-w-full rounded-none
+}
