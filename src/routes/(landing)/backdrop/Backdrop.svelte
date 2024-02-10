@@ -2,15 +2,14 @@
   import { onMount } from "svelte"
   import { quartOut } from "svelte/easing"
   import { slide} from "svelte-legos"
+  import { darkmode, window_closed } from "../../../lib/store/store"
 
-  export var darkmode = true
   export var intro_ended = false
-  export var window_closed = false
 
-  var page_loaded, anim_finished = false
+  var page_loaded = false
   var darken_overlay, b_container, b_grid = null
   var current_finished_anim = 0
-
+  
   const anim_duration = 500
   const total_duration = 1000
   const images = [
@@ -43,6 +42,7 @@
     // Chrome went apes when the delay is not set
     setTimeout(() => {
       page_loaded = true
+
     }, 500)
   })
 
@@ -50,27 +50,27 @@
     current_finished_anim += 1
     if (current_finished_anim === 4){
       intro_ended = true
-      anim_finished = true
     }
   }
 
 	$: {
     if (page_loaded && b_container){
       b_container.classList.add("scale-anim")
+
     }
     if(darken_overlay) {
       if (intro_ended) {
       
         darken_overlay.classList.add('opacity-30')
 
-        if (window_closed) darken_overlay.classList.remove('opacity-30')
+        if ($window_closed) darken_overlay.classList.remove('opacity-30')
         else darken_overlay.classList.add('opacity-30')
       }
       
 
 		}
     if (b_grid){
-      if (window_closed) b_grid.classList.add('grid-porto')
+      if ($window_closed) b_grid.classList.add('grid-porto')
       else b_grid.classList.remove('grid-porto')
     }
 	}
@@ -90,7 +90,7 @@
           <div class="{image.bg_color} relative h-full w-full opacity-25"/>
 
           <!-- Light Mode Images -->
-          {#if !darkmode}
+          {#if $darkmode === false || $darkmode == "false"} <!-- Bruh -->
             <div class="{image.img_light} relative bg-cover bg-center bg-repeat w-full h-full mt-[-100vh]"
             transition:slide = {{direction: (image.direction), delay: (image.delay/4), easing: quartOut, duration: anim_duration}}>
               

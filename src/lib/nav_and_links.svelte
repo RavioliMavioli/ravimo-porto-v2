@@ -1,5 +1,5 @@
 <script context="module">
-  export const title_bar = [
+  export const window_controls = [
     {color: "text-[--theme-yellow]", active: false, index: 0},
     {color: "text-[--theme-green]", active: false, index: 1},
     {color: "text-[--theme-red]", active: false, index: 2},

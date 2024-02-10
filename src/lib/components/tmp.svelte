@@ -1,23 +1,32 @@
 <script>
   import acchan from "../../../assets/img/acchan.png"
-  import Window from "../../../lib/components/Window.svelte"
   import QuarterCircle from "../../../lib/circularbar.svelte"
   import LinedTitle from "../../../lib/lined_title.svelte"
   import Tide from "../../../lib/tide.svelte"
-  import { nav_list, links } from "../../../lib/nav_and_links.svelte"
+  import { nav_list, links, window_controls } from "../../../lib/nav_and_links.svelte"
+  import { set_darkmode } from "../../../lib/color_manager.svelte"
 
   import { tweened } from 'svelte/motion'
   import { quadOut } from 'svelte/easing'
 
+  export var darkmode = true
   export var intro_ended = false
-  var overlay = "absolute top-0 opacity-0 card-opacity-animate bg-white translucent h-full w-full max-sm:w-[90%] rounded-3xl pointer-events-none"
-  var anim_init = "anim"
+  export var window_closed = false
+
   //intro_ended = true
-  
+
+  var the_window = null
+
+  const darkmode_text = {text: "Dark", icon: "fa-moon"}
   var value = tweened(0.0, {
     duration: 2000,
     easing: quadOut
   })
+  
+  const change_darkmode_text = () => {
+    darkmode_text.text = darkmode ? "Dark" : "Light"
+    darkmode_text.icon = darkmode ? "fa-moon" : "fa-sun"
+  }
 
   $: {
     if (intro_ended){
@@ -26,15 +35,72 @@
         }, 300)
     }
   }
+  var window_taksbar = null
+
+  function window_control(obj){
+    obj.active = !obj.active
+
+    switch (obj.index) {
+      case (0):
+        window_closed = !window_closed
+        if (obj.active){
+          the_window.classList.add('minimize')
+          window_taksbar.classList.add('window-taskbar-show')
+        }
+        else {
+          the_window.classList.remove('minimize')
+          window_taksbar.classList.remove('window-taskbar-show')
+        }
+        break
+
+      case (1):
+        if (obj.active) the_window.classList.add('maximize')
+        else the_window.classList.remove('maximize')
+        break
+
+      case (2):
+        window_closed = !window_closed
+        if (obj.active) {
+          the_window.classList.add('close')
+          window_taksbar.classList.add('window-taskbar-show')
+        }
+        else {
+          the_window.classList.remove('close')
+          window_taksbar.classList.remove('window-taskbar-show')
+        }
+        break
+    }
+
+  }
+
+  function open_window(){
+    window_controls[0].active = false
+    window_controls[2].active = false
+    window_closed = false
+    window_taksbar.classList.remove('window-taskbar-show')
+    the_window.classList.remove('minimize', 'close')
+    
+  }
+
+
+
+
+  
+    
 
 </script>
 
 <!----------------------------------- Window Container ----------------------------------->
-<div class="absolute w-screen h-screen" >
+<div class="absolute flex justify-center items-center top-0 left-0 h-screen w-screen" >
   <!-- Check if backdrop animation is completed -->
   {#if intro_ended}
     <!-- Window -->
-      <Window bind:overlay bind:anim_init >
+    <div class="translucent-round anim relative flex justify-start items-center flex-col duration-300
+                h-[70%] w-[60%] 3xl:min-w-[40%] 3xl:h-[50%] max-xl:min-w-[70%] max-md:min-w-[90%]"
+                bind:this={the_window}>
+      <!-- Window Container -->
+      <div class="relative no-scrollbar overflow-y-scroll mt-14 mb-6 px-[30px] h-full w-full
+                  max-md:mt-10">
         <!---------------------- Upper Section ---------------------->
         <div class="flex-middle h-auto gap-2 mt-6
                     max-lg:flex-col max-lg:items-center">
@@ -120,22 +186,59 @@
         </div>
         <!---------------------- Bottom Section ---------------------->
         <div class="flex-middle w-full h-[1px]"></div>
+      </div>
+      <!----------------------------------- Window Controls Section ----------------------------------->
 
-      </Window>
-      
-    
+      <!-- White window loading -->
+      <div class="absolute top-0 opacity-0 card-opacity-animate bg-[--theme-white] translucent h-full w-full max-sm:w-[90%] rounded-3xl pointer-events-none"/>
+      <!-- Window Control Container -->
+      <div class="absolute w-full px-[20px] h-6 top-4 overflow-y-hidden
+                  max-md:top-2 max-sm:px-[10px]">
+        
+        <div class="relative flex-middle justify-end gap-2">
+          <!-- Dark Mode Button -->
+          <button class="absolute left-0 flex-middle flex-row w-auto border-[--theme-nord] border-2 rounded-full group
+                         hover:border-[--theme-white] hover:bg-[--theme-white] hover:glow"
+                         on:click={() => {darkmode = !darkmode; set_darkmode(darkmode); change_darkmode_text()}}>
+            <p2 class="text-[--theme-white] p-1 ml-2 group-hover:text-[--theme-black]">{darkmode_text.text}</p2>
+            <i class="{darkmode_text.icon} fa-solid text-sm p-1 mr-2 group-hover:text-[--theme-black]"/>
+          </button>
+          <!-- Window Control Buttons -->
+            {#each window_controls as bar}
+              <button on:click={() => {window_control(bar)}}>
+                <i class="fa-solid fa-circle text-xl
+                          {bar.color} 
+                          max-lg:text-lg
+                          max-md:text-sm
+                          hover:opacity-75"></i>
+              </button>
+            {/each}
+        </div>
+      </div>
+    </div>
+    <!-- Taskbar Icon Button -->
+    <button class=" absolute scale-0 opacity-0 rotate-45 translucent-round bottom-10 rounded-full duration-300
+                    w-[100px] h-[100px]
+                    max-xl:h-[90px] max-xl:w-[90px]
+                    max-lg:h-[80px] max-lg:w-[80px]" bind:this={window_taksbar} on:click={() => {open_window()}}>
+      <i class="fa-solid fa-window-restore text-[--theme-white]
+                text-2xl  
+                max-xl:text-xl
+                max-lg:text-lg"></i>
+    </button>
+
   {/if}
 
 </div>
 
 <style>
 
-  :global(.card-opacity-animate) {
+  .card-opacity-animate{
     animation-name: opacity;
     animation-duration: 1s;
   }
 
-  :global(.anim) {
+  .anim {
     animation-name: card;
     animation-duration: 1s;
     animation-timing-function: e;

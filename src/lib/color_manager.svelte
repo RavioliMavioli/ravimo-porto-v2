@@ -1,4 +1,5 @@
 <script context="module">
+
   const colors = [
     {name:"dark-color", dark: "#242b39bb", light: "#eceff4bb"},
 
@@ -29,23 +30,3 @@
   }
 
 </script>
-
-<style>
-  :root {
-  --dark-color: #242b39bb;
-
-  --theme-nord: #4c566a;
-  --theme-red: #bf616a;
-  --theme-green: #a3be8c;
-  --theme-yellow: #ebcb8b;
-  --theme-blue: #5e81ac;
-  --theme-purple: #b48ead;
-  --theme-cyan: #81a1c1;
-  --theme-white: #eceff4;
-  --theme-black: #2e3440;
-  
-  --theme-glow: rgba(255,255,255,0.2);
-
-  --theme-absolute-white: #eceff4;
-  }
-</style>
