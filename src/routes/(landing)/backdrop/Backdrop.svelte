@@ -62,8 +62,8 @@
       if (intro_ended) darken_overlay.classList.add('opacity-30')
       if (anim_finished) darken_overlay.classList.add('opacity-30')
       
-      if (window_closed) darken_overlay.classList.add('hide')
-      else darken_overlay.classList.remove('hide')
+      if (window_closed) darken_overlay.classList.remove('opacity-30')
+      else darken_overlay.classList.add('opacity-30')
 		}
     if (b_grid){
       if (window_closed) b_grid.classList.add('grid-porto')
@@ -75,7 +75,7 @@
 </script>
 
 <div class="fixed flex justify-center items-center overflow-hidden" bind:this={b_container}>
-  <div class="grid grid-flow-col grid-normal w-screen h-screen gap-2 overflow-hidden duration-500" bind:this={b_grid}>
+  <div class="grid grid-flow-col grid-normal w-screen h-screen gap-2 overflow-hidden" bind:this={b_grid}>
     
     {#each images as image}
       {#if page_loaded}
@@ -102,9 +102,6 @@
 
 <style>
   /* Svelte doesn't compile these class without :global() lmao */
-  :global(.hide) {
-    @apply opacity-0
-  }
 
   :global(.scale-anim) {
     animation-name: bscale;

@@ -13,7 +13,7 @@
   export var intro_ended = false
   export var window_closed = false
 
-  //intro_ended = true
+  intro_ended = true
 
   var the_window = null
 
@@ -217,8 +217,14 @@
       </div>
     </div>
     <!-- Taskbar Icon Button -->
-    <button class="absolute w-[100px] h-[100px] scale-0 opacity-0 rotate-45 translucent-round bottom-10 rounded-full duration-300" bind:this={window_taksbar} on:click={() => {open_window()}}>
-      <i class="fa-solid fa-window-restore text-2xl text-[--theme-white]"></i>
+    <button class=" absolute scale-0 opacity-0 rotate-45 translucent-round bottom-10 rounded-full duration-300
+                    w-[100px] h-[100px]
+                    max-xl:h-[90px] max-xl:w-[90px]
+                    max-lg:h-[80px] max-lg:w-[80px]" bind:this={window_taksbar} on:click={() => {open_window()}}>
+      <i class="fa-solid fa-window-restore text-[--theme-white]
+                text-2xl  
+                max-xl:text-xl
+                max-lg:text-lg"></i>
     </button>
 
   {/if}
