@@ -1,4 +1,5 @@
 <script>
+
   import { window_controls } from "../nav_and_links.svelte"
   import { set_darkmode } from "../color_manager.svelte"
   import { darkmode, window_closed} from "../store/store"
@@ -68,7 +69,7 @@
 </script>
 
 <!----------------------------------- Window Container ----------------------------------->
-<div class="absolute flex justify-center items-center top-0 left-0 h-screen w-screen">
+<div class="absolute flex justify-center items-center top-0 left-0 h-screen w-screen"  >
 
     <!-- Window -->
     <div class="translucent-round {anim_init} relative flex justify-start items-center flex-col duration-300
@@ -122,5 +123,4 @@
                 max-xl:text-xl
                 max-lg:text-lg"></i>
     </button>
-
 </div>

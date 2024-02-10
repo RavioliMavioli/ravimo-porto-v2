@@ -9,7 +9,7 @@
   var intro_ended
 
   onMount(() => {
-    $darkmode = ($darkmode === "true") // Js moment
+    $darkmode = !($darkmode === "false") // Js moment
     set_darkmode($darkmode)
   })
 
