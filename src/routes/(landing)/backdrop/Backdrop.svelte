@@ -61,6 +61,7 @@
     if(darken_overlay) {
       if (intro_ended) darken_overlay.classList.add('opacity-30')
       if (anim_finished) darken_overlay.classList.add('opacity-30')
+      
       if (window_closed) darken_overlay.classList.add('hide')
       else darken_overlay.classList.remove('hide')
 		}

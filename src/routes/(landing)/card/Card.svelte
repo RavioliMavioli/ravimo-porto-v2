@@ -13,7 +13,7 @@
   export var intro_ended = false
   export var window_closed = false
 
-  intro_ended = true
+  //intro_ended = true
 
   var the_window = null
 
