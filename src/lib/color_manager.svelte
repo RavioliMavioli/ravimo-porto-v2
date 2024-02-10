@@ -10,8 +10,9 @@
     {name:"theme-purple", dark: "#b48ead", light: "#b48ead"},
     {name:"theme-cyan", dark: "#81a1c1", light: "#81a1c1"},
     {name:"theme-white", dark: "#eceff4", light: "#2e3440"},
-    {name:"theme-black", dark: "#2e3440", light: "#eceff4"}
+    {name:"theme-black", dark: "#2e3440", light: "#eceff4"},
 
+    {name:"theme-glow", dark:"rgba(255,255,255,0.2)", light:"rgba(0,0,0,0.2)"}
   ] 
 
   export const set_darkmode = (bool) => {
@@ -42,6 +43,8 @@
   --theme-cyan: #81a1c1;
   --theme-white: #eceff4;
   --theme-black: #2e3440;
+  
+  --theme-glow: rgba(255,255,255,0.2);
 
   --theme-absolute-white: #eceff4;
   }

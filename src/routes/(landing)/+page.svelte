@@ -6,10 +6,11 @@
   
   var intro_ended
   var darkmode
+  var window_closed
 
 </script>
 
-<Backdrop bind:intro_ended bind:darkmode/>
-<Card bind:intro_ended bind:darkmode />
+<Backdrop bind:intro_ended bind:darkmode bind:window_closed />
+<Card bind:intro_ended bind:darkmode bind:window_closed />
 
 <svelte:window/>

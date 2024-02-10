@@ -18,14 +18,9 @@ export default {
         'xl': '1000'
       },
       screens: {
+        'xl': '1366px',
         '3xl': '2160px',
       },
-      dropShadow: {
-        glow: [
-          "0 0px 16px rgba(255, 255, 255, 0.1)",
-          "0 0px 16px rgba(255, 255,255, 0.1)"
-        ]
-      }
     }
   },
   

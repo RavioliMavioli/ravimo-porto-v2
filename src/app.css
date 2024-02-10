@@ -50,17 +50,6 @@ p3 {
   font-weight: normal;
 }
 
-.border-top-r{
-  position:absolute;
-  top:9px;
-  left:9px;
-  height:100px;
-  width:100px;
-  background-color:var(--theme-white);
-  border:1px solid red;
-}
-
-
 @media (max-width: 2000px) {
   :root {
     --h1-size:56px;
@@ -111,7 +100,9 @@ p3 {
   }
 
   .glow{
-    @apply drop-shadow-glow
+    -webkit-box-shadow:0px 0px 16px 0px var(--theme-glow);
+    -moz-box-shadow: 0px 0px 16px 0px var(--theme-glow);
+    box-shadow: 0px 0px 16px 0px var(--theme-glow);
   }
 }
 
@@ -141,6 +132,16 @@ p3 {
   @apply left-0 rounded-tl-xl
 
 }
+.border-top-r{
+  position:absolute;
+  top:9px;
+  left:9px;
+  height:100px;
+  width:100px;
+  background-color:var(--theme-white);
+  border:1px solid red;
+}
+
 .border-l-only{
   position: absolute;
   display: block;
@@ -162,5 +163,17 @@ p3 {
 }
 
 .maximize{
-  @apply min-h-full max-h-full min-w-[100%] rounded-none
+  @apply h-screen w-screen rounded-none
+}
+
+.minimize{
+  @apply scale-0 mt-[83vh] rounded-none
+}
+
+.close{
+  @apply scale-90 opacity-0 pointer-events-none
+}
+
+.window-taskbar-show {
+  @apply scale-100 opacity-100 rotate-0
 }

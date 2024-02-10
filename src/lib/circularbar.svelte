@@ -69,7 +69,7 @@
 
             // Font sizes
             if (!checkable) {
-                textLarge.style.fontSize = Math.max((radius / 2), 12) + 'px';
+                textLarge.style.fontSize = /*Math.max((radius / 2), 12) + 'px'*/ '0px';
                 if (info) {
                     textSmall.style.fontSize = Math.max((radius / 6), 6) + 'px';
                 }
@@ -90,7 +90,7 @@
         </svg>
         {#if !checkable}   
             <div class="info">
-                <b bind:this={textLarge}>{newValue}</b><b bind:this={percent}>%</b>
+                <b bind:this={textLarge}>{newValue}</b><b bind:this={percent}></b>
                 {#if info}
                     <br>
                     <div bind:this={textSmall}>{info}</div>

@@ -1,8 +1,8 @@
 <script context="module">
   export const title_bar = [
-    {color: "text-[--theme-yellow]"},
-    {color: "text-[--theme-green]"},
-    {color: "text-[--theme-red]"},
+    {color: "text-[--theme-yellow]", active: false, index: 0},
+    {color: "text-[--theme-green]", active: false, index: 1},
+    {color: "text-[--theme-red]", active: false, index: 2},
   ]
 
   export const nav_list = [

@@ -1,13 +1,14 @@
 <script>
-  import { onMount, } from "svelte"
-  import { quartOut} from "svelte/easing"
+  import { onMount } from "svelte"
+  import { quartOut } from "svelte/easing"
   import { slide} from "svelte-legos"
 
   export var darkmode = true
   export var intro_ended = false
+  export var window_closed = false
 
   var page_loaded, anim_finished = false
-  var multiply_opacity, b_container = null
+  var darken_overlay, b_container, b_grid = null
   var current_finished_anim = 0
 
   const anim_duration = 500
@@ -57,35 +58,36 @@
     if (page_loaded && b_container){
       b_container.classList.add("scale-anim")
     }
-    if(multiply_opacity) {
-      if (intro_ended){
-			  multiply_opacity.classList.add('opacity-animate')
-        multiply_opacity.classList.add('bg-black')
-      }
-      if (anim_finished){
-        multiply_opacity.classList.add('opacity-30')
-      }
+    if(darken_overlay) {
+      if (intro_ended) darken_overlay.classList.add('opacity-30')
+      if (anim_finished) darken_overlay.classList.add('opacity-30')
+      if (window_closed) darken_overlay.classList.add('hide')
+      else darken_overlay.classList.remove('hide')
 		}
+    if (b_grid){
+      if (window_closed) b_grid.classList.add('grid-porto')
+      else b_grid.classList.remove('grid-porto')
+    }
 	}
 
 
 </script>
 
 <div class="fixed flex justify-center items-center overflow-hidden" bind:this={b_container}>
-  <div class="grid grid-flow-col grid-cols-4 w-screen h-screen gap-2 overflow-hidden
-              max-sm:grid-cols-3 max-sm:gap-0">
+  <div class="grid grid-flow-col grid-normal w-screen h-screen gap-2 overflow-hidden duration-500" bind:this={b_grid}>
     
     {#each images as image}
       {#if page_loaded}
-        <div class={image.img + " relative bg-cover bg-center bg-repeat"}
+        <div class="{image.img} relative bg-cover bg-center bg-repeat"
           transition:slide = {{direction: (image.direction), delay: (image.delay), easing: quartOut, duration: anim_duration}}
           on:introend = {()=> (set_anim_state())}>
 
-          <div class={image.bg_color + " relative h-full w-full opacity-25"}/>
+          <div class="{image.bg_color} relative h-full w-full opacity-25"/>
 
+          <!-- Light Mode Images -->
           {#if !darkmode}
-            <div class={image.img_light + " relative bg-cover bg-center bg-repeat w-full h-full mt-[-100vh]"}
-            transition:slide = {{direction: (image.direction), delay: (image.delay/2), easing: quartOut, duration: anim_duration}}>
+            <div class="{image.img_light} relative bg-cover bg-center bg-repeat w-full h-full mt-[-100vh]"
+            transition:slide = {{direction: (image.direction), delay: (image.delay/4), easing: quartOut, duration: anim_duration}}>
               
             </div>
           {/if}
@@ -94,21 +96,30 @@
     {/each}
     
   </div>
-  <div class="absolute w-full h-full" bind:this={multiply_opacity}/>
+  <div class="absolute bg-black opacity-0 w-full h-full duration-500" bind:this={darken_overlay}/>
 </div>
 
 <style>
   /* Svelte doesn't compile these class without :global() lmao */
-  :global(.opacity-animate) {
-    animation-name: opacity-anim;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
+  :global(.hide) {
+    @apply opacity-0
   }
+
   :global(.scale-anim) {
     animation-name: bscale;
     animation-duration: 2.0s;
     animation-timing-function: ease-in-out;
     
+  }
+
+  :global(.grid-normal){
+    @apply max-md:grid-cols-3 max-md:gap-0
+  }
+
+  :global(.grid-porto){
+    @apply  max-md:grid-flow-row
+            max-md:grid-rows-3
+            max-md:grid-cols-1
   }
 
   @keyframes bscale {
@@ -122,14 +133,6 @@
     }
     100%{
       scale: 100%;
-    }
-  }
-  @keyframes opacity-anim{
-    0% {
-      opacity: 0;
-    }
-    100%{
-      opacity: 0.3;
     }
   }
   
