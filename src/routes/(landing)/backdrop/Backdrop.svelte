@@ -59,11 +59,15 @@
       b_container.classList.add("scale-anim")
     }
     if(darken_overlay) {
-      if (intro_ended) darken_overlay.classList.add('opacity-30')
-      if (anim_finished) darken_overlay.classList.add('opacity-30')
+      if (intro_ended) {
       
-      if (window_closed) darken_overlay.classList.remove('opacity-30')
-      else darken_overlay.classList.add('opacity-30')
+        darken_overlay.classList.add('opacity-30')
+
+        if (window_closed) darken_overlay.classList.remove('opacity-30')
+        else darken_overlay.classList.add('opacity-30')
+      }
+      
+
 		}
     if (b_grid){
       if (window_closed) b_grid.classList.add('grid-porto')
