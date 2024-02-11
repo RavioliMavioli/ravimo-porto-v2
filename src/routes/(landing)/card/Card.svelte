@@ -12,7 +12,7 @@
   export var intro_ended = false
   var overlay = "absolute top-0 opacity-0 card-opacity-animate bg-white translucent h-full w-full max-sm:w-[90%] rounded-3xl pointer-events-none"
   var anim_init = "anim"
-  //intro_ended = true
+  intro_ended = true
   
   var value = tweened(0.0, {
     duration: 2000,
@@ -66,17 +66,22 @@
           </div>
 
           <!-- Biodata -->
-          <div class="flex-middle flex-col gap-5 ms-10 text-justify
-                      max-lg:mx-10 max-lg:my-8">
+          <div class="flex-middle flex-col gap-5 ms-10 text-center
+                      max-lg:mx-10 max-lg:my-8
+                      max-sm:text-justify">
               <!-- First Line -->
               <LinedTitle title="Ravimo"/>
               <!-- Introduction -->
               <div class="mx-[1rem]">
                 <p1>
-                  Hello! I am Ravimo, an illustrator,
-                  front end developer, game developer, and open-source enthusiast.
+                  Hello! I am Ravimo, an illustrator, developer, and Linux enthusiast.
                   Welcome to my web page!
                 </p1>
+                <div class="flex-middle gap-4 pt-5 max-sm:flex-col max-sm:items-start">
+                  <i class="fa-solid fa-paintbrush text-[--theme-green] flex flow-row gap-2"><p2>illustrator</p2></i>
+                  <i class="fa-solid fa-gamepad text-[--theme-purple] flex flow-row gap-2"><p2>Game Dev</p2></i>
+                  <i class="fa-solid fa-globe text-[--theme-blue] flex flow-row gap-2"><p2>Front End Dev</p2></i>
+                </div>
               </div>
               <!-- Second Line -->
               <LinedTitle/>
