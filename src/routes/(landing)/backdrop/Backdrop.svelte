@@ -8,6 +8,7 @@
 
   var page_loaded = false
   var darken_overlay, b_container, b_grid = null
+  var grad_element = []
   var current_finished_anim = 0
   
   const anim_duration = 500
@@ -18,24 +19,28 @@
       img_light: " bg-light1",
       bg_color: "bg-gradient-to-br from-cyan-500 to-sky-900",
       delay: total_duration * 0,
-      direction: "top"},
+      direction: "top",
+      index: 0},
 
     { img: " bg-backdrop1",
       img_light: " bg-light2",
       bg_color: "bg-gradient-to-b from-sky-500 to-indigo-900",
       delay: total_duration / 3,
-      direction: "bottom"},
+      direction: "bottom",
+      index: 1},
 
     { img: " bg-backdrop4",
       img_light: " bg-light3",
       bg_color: "bg-gradient-to-bl from-blue-500 to-violet-900",
-      delay: total_duration / 1.5, direction: "top"},
+      delay: total_duration / 1.5, direction: "top",
+      index: 2},
 
     { img: " bg-backdrop3",
       img_light: " bg-light4",
       bg_color: "bg-gradient-to-bl from-indigo-600 to-purple-900",
       delay: total_duration / 1,
-      direction: "bottom"}
+      direction: "bottom",
+      index: 3},
   ]
 
   onMount(() => {
@@ -73,6 +78,19 @@
       if ($window_closed) b_grid.classList.add('grid-porto')
       else b_grid.classList.remove('grid-porto')
     }
+    if (grad_element) {
+      if ($window_closed) {
+        grad_element.forEach(element => {
+          console.log(element)
+          element.classList.remove('opacity-20')
+        })
+      }
+      else {
+        grad_element.forEach(element => {
+          element.classList.add('opacity-20')
+        })
+      }
+    }
 	}
 
 
@@ -82,22 +100,23 @@
   <div class="grid grid-flow-col grid-normal w-screen h-screen gap-2 overflow-hidden" bind:this={b_grid}>
     
     {#each images as image}
+
       {#if page_loaded}
         <div class="{image.img} relative bg-cover bg-center bg-repeat"
           transition:slide = {{direction: (image.direction), delay: (image.delay), easing: quartOut, duration: anim_duration}}
           on:introend = {()=> (set_anim_state())}>
-
-          <div class="{image.bg_color} relative h-full w-full opacity-25"/>
+          
+          <!-- Dark Mode Gradients -->
+          <div class="{image.bg_color} relative h-full w-full opacity-0 duration-500" bind:this={grad_element[image.index]}/>
 
           <!-- Light Mode Images -->
-          {#if $darkmode === false || $darkmode == "false"} <!-- Bruh -->
+          {#if $darkmode === false || $darkmode === "false"} <!-- Js moment -->
             <div class="{image.img_light} relative bg-cover bg-center bg-repeat w-full h-full mt-[-100vh]"
-            transition:slide = {{direction: (image.direction), delay: (image.delay/4), easing: quartOut, duration: anim_duration}}>
-              
-            </div>
+            transition:slide = {{direction: (image.direction), delay: (image.delay/4), easing: quartOut, duration: anim_duration}}/>
           {/if}
         </div>
       {/if}
+
     {/each}
     
   </div>
