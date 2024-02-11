@@ -72,25 +72,19 @@
         else darken_overlay.classList.add('opacity-30')
       }
       
-
 		}
     if (b_grid){
       if ($window_closed) b_grid.classList.add('grid-porto')
       else b_grid.classList.remove('grid-porto')
     }
+
     if (grad_element) {
-      if ($window_closed) {
-        grad_element.forEach(element => {
-          console.log(element)
-          element.classList.remove('opacity-20')
+      grad_element.forEach(element => {
+        if ($window_closed) element.classList.remove('opacity-20')
+        else element.classList.add('opacity-20')
         })
-      }
-      else {
-        grad_element.forEach(element => {
-          element.classList.add('opacity-20')
-        })
-      }
     }
+    
 	}
 
 
@@ -105,7 +99,7 @@
         <div class="{image.img} relative bg-cover bg-center bg-repeat"
           transition:slide = {{direction: (image.direction), delay: (image.delay), easing: quartOut, duration: anim_duration}}
           on:introend = {()=> (set_anim_state())}>
-          
+
           <!-- Dark Mode Gradients -->
           <div class="{image.bg_color} relative h-full w-full opacity-0 duration-500" bind:this={grad_element[image.index]}/>
 
