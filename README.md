@@ -6,7 +6,7 @@ For deploying: <br />
 ```
 git clone https://github.com/RavioliMavioli/ravimo-porto-v2.git
 
-cd cursed_telegram_message
+cd ravimo-porto-v2
 
 npm install
 
