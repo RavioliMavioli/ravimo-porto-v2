@@ -4,7 +4,7 @@
 
 For deploying: <br />
 ```
-git clone https://github.com/RavioliMavioli/cursed_telegram_message
+git clone https://github.com/RavioliMavioli/ravimo-porto-v2.git
 
 cd cursed_telegram_message
 
