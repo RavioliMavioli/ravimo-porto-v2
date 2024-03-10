@@ -32,7 +32,10 @@
       page_loaded = true
 
     }, 500)
-    // Max scrolllength
+    // Init max length
+    MAX_LENGTH = window.innerWidth * 2
+    if (window.innerWidth < 768) MAX_LENGTH = window.innerWidth * 11
+    // Max scroll length
     window.addEventListener("resize", () => {
       MAX_LENGTH = window.innerWidth * 2
       if (window.innerWidth < 768) MAX_LENGTH = window.innerWidth * 11
@@ -113,7 +116,7 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="fixed flex justify-center items-center" bind:this={b_container}>
   <!-- Grid container -->
-  <div class="relative grid grid-flow-col grid-normal w-screen h-screen scale-[115%]" bind:this={b_grid}>
+  <div class="relative grid grid-flow-col grid-normal h-screen scale-[115%]" bind:this={b_grid}>
     <!-- Elements inside the grid -->
     
     <!-- 4 main background images -->
@@ -179,7 +182,8 @@
   }
 
   :global(.grid-normal){
-    @apply  grid-cols-4
+    @apply  w-[100vw]
+            grid-cols-4
             max-md:grid-cols-3
   }
 
