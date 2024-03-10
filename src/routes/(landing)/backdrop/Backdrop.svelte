@@ -6,10 +6,10 @@
 
   export var intro_ended = false
 
-  var page_loaded = false
-  var darken_overlay, b_container, b_grid = null
-  var grad_element = []
-  var current_finished_anim = 0
+  let page_loaded = false
+  let darken_overlay, b_container, b_grid = null
+  let grad_element = []
+  let current_finished_anim = 0
   
   const anim_duration = 500
   const total_duration = 1000
@@ -60,12 +60,14 @@
 
 	$: {
     if (page_loaded && b_container){
-      b_container.classList.add("scale-anim")
+      b_container.classList.add("scale-anim-1")
 
     }
+
     if(darken_overlay) {
-      if (intro_ended) {
-      
+      if (intro_ended && b_grid) {
+        b_grid.classList.add("scale-anim-2")
+        b_grid.classList.remove("scale-[115%]")
         darken_overlay.classList.add('opacity-30')
 
         if ($window_closed) darken_overlay.classList.remove('opacity-30')
@@ -73,6 +75,7 @@
       }
       
 		}
+
     if (b_grid){
       if ($window_closed) b_grid.classList.add('grid-porto')
       else b_grid.classList.remove('grid-porto')
@@ -84,14 +87,13 @@
         else element.classList.add('opacity-20')
         })
     }
-    
 	}
 
 
 </script>
 
 <div class="fixed flex justify-center items-center overflow-hidden" bind:this={b_container}>
-  <div class="grid grid-flow-col grid-normal w-screen h-screen gap-2 overflow-hidden" bind:this={b_grid}>
+  <div class="grid grid-flow-col grid-normal w-screen h-screen gap-2 overflow-hidden scale-[115%]" bind:this={b_grid}>
     
     {#each images as image}
 
@@ -120,9 +122,16 @@
 <style>
   /* Svelte doesn't compile these class without :global() lmao */
 
-  :global(.scale-anim) {
-    animation-name: bscale;
-    animation-duration: 2.0s;
+  :global(.scale-anim-1) {
+    animation-name: bscale-1;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    
+  }
+
+  :global(.scale-anim-2) {
+    animation-name: bscale-2;
+    animation-duration: 0.5s;
     animation-timing-function: ease-in-out;
     
   }
@@ -137,17 +146,22 @@
             max-md:grid-cols-1
   }
 
-  @keyframes bscale {
-    0% {
-      scale: 140%;
+  @keyframes bscale-1 {
+    from {
+      @apply scale-[120%];
       animation-timing-function: ease-out;
     }
 
-    70% {
-      scale: 120%;
+    to {
+      @apply scale-[100%];
     }
-    100%{
-      scale: 100%;
+  }
+  @keyframes bscale-2 {
+    from {
+      @apply scale-[115%];
+    }
+    to {
+      @apply scale-[100%];
     }
   }
   
