@@ -148,20 +148,20 @@
 
   @keyframes bscale-1 {
     from {
-      @apply scale-[120%];
+      scale: 120%;
       animation-timing-function: ease-out;
     }
 
     to {
-      @apply scale-[100%];
+      scale: 100%;
     }
   }
   @keyframes bscale-2 {
     from {
-      @apply scale-[115%];
+      scale: 115%;
     }
     to {
-      @apply scale-[100%];
+      scale: 100%;
     }
   }
   
