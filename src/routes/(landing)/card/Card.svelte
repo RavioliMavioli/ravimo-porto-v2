@@ -8,7 +8,7 @@
 
   import { tweened } from 'svelte/motion'
   import { quadOut } from 'svelte/easing'
-
+  
   export var intro_ended = false
   var overlay = "absolute top-0 opacity-0 card-opacity-animate bg-white translucent h-full w-full max-sm:w-[90%] rounded-3xl pointer-events-none"
   var anim_init = "anim"

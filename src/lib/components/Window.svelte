@@ -114,7 +114,7 @@
       </div>
     </div>
     <!-- Taskbar Icon Button -->
-    <button class=" absolute scale-0 opacity-0 rotate-45 translucent-round bottom-10 rounded-full duration-300
+    <button class=" fixed scale-0 opacity-0 rotate-45 translucent-round bottom-10 rounded-full duration-300
                     w-[100px] h-[100px]
                     max-xl:h-[90px] max-xl:w-[90px]
                     max-lg:h-[80px] max-lg:w-[80px]" bind:this={window_taksbar} on:click={() => {open_window()}}>
