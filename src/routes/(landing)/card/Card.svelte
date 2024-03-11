@@ -30,7 +30,7 @@
 </script>
 
 <!----------------------------------- Window Container ----------------------------------->
-<div class="absolute w-screen h-screen" >
+<div class="absolute w-screen h-screen pointer-events-none" >
   <!-- Check if backdrop animation is completed -->
   {#if intro_ended}
     <!-- Window -->
@@ -143,7 +143,7 @@
   :global(.anim) {
     animation-name: card;
     animation-duration: 1s;
-    animation-timing-function: e;
+    animation-timing-function: ease-in-out;
     
   }
 

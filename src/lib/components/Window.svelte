@@ -5,7 +5,7 @@
   import { darkmode, window_closed} from "../store/store"
   import { onMount } from "svelte"
 
-  var the_window, window_taksbar = null
+  var the_window, window_taskbar = null
 
   export var overlay = ""
   export var anim_init = ""
@@ -24,11 +24,11 @@
         $window_closed = !$window_closed
         if (obj.active){
           the_window.classList.add('minimize')
-          window_taksbar.classList.add('window-taskbar-show')
+          window_taskbar.classList.add('window-taskbar-show')
         }
         else {
           the_window.classList.remove('minimize')
-          window_taksbar.classList.remove('window-taskbar-show')
+          window_taskbar.classList.remove('window-taskbar-show')
         }
         break
 
@@ -41,11 +41,11 @@
         $window_closed = !$window_closed
         if (obj.active) {
           the_window.classList.add('close')
-          window_taksbar.classList.add('window-taskbar-show')
+          window_taskbar.classList.add('window-taskbar-show')
         }
         else {
           the_window.classList.remove('close')
-          window_taksbar.classList.remove('window-taskbar-show')
+          window_taskbar.classList.remove('window-taskbar-show')
         }
         break
     }
@@ -56,7 +56,7 @@
     window_controls[0].active = false
     window_controls[2].active = false
     $window_closed = false
-    window_taksbar.classList.remove('window-taskbar-show')
+    window_taskbar.classList.remove('window-taskbar-show')
     the_window.classList.remove('minimize', 'close')
     
   }
@@ -69,10 +69,10 @@
 </script>
 
 <!----------------------------------- Window Container ----------------------------------->
-<div class="absolute flex justify-center items-center top-0 left-0 h-screen w-screen"  >
+<div class="absolute flex justify-center items-center top-0 left-0 h-screen w-screen pointer-events-none"  >
 
     <!-- Window -->
-    <div class="translucent-round {anim_init} relative flex justify-start items-center flex-col duration-300
+    <div class="translucent-round {anim_init} relative flex justify-start items-center flex-col duration-300 pointer-events-auto
                 h-[70%] w-[60%] 3xl:min-w-[40%] 3xl:h-[50%] max-xl:min-w-[70%] max-md:min-w-[90%]"
                 bind:this={the_window}>
       <!-- Window Container -->
@@ -114,13 +114,19 @@
       </div>
     </div>
     <!-- Taskbar Icon Button -->
-    <button class=" fixed scale-0 opacity-0 rotate-45 translucent-round bottom-10 rounded-full duration-300
+    <button class=" pointer-events-auto fixed scale-0 opacity-0 rotate-45 translucent-round bottom-10 rounded-full duration-300
                     w-[100px] h-[100px]
                     max-xl:h-[90px] max-xl:w-[90px]
-                    max-lg:h-[80px] max-lg:w-[80px]" bind:this={window_taksbar} on:click={() => {open_window()}}>
+                    max-lg:h-[80px] max-lg:w-[80px]
+                    hover:-translate-y-2
+                    active:translate-y-0 active:bg-[--theme-white]
+                    "
+                    bind:this={window_taskbar} on:click={() => {open_window()}}>
       <i class="fa-solid fa-window-restore text-[--theme-white]
                 text-2xl  
                 max-xl:text-xl
                 max-lg:text-lg"></i>
+      <div class="absolute w-full h-full top-0 left-0 rounded-full bg-white duration-500
+                  {$window_closed ? "opacity-0" : "opacity-100"}" />
     </button>
 </div>

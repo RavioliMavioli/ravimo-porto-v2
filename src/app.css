@@ -114,7 +114,7 @@ p3 {
   }
   
   .translucent-round{
-    @apply bg-[--dark-color] backdrop-blur-2xl shadow-2xl rounded-3xl;
+    @apply bg-[--dark-color] backdrop-blur-2xl shadow-2xl rounded-3xl shadow-[#271d3b55];
   }
 
   .glow{
@@ -194,4 +194,23 @@ p3 {
 
 .window-taskbar-show {
   @apply scale-100 opacity-100 rotate-0
+}
+
+.opacity-0-100-0{
+  animation-name: op-0-1-0;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+}
+
+@keyframes op-0-1-0 {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+  
 }
