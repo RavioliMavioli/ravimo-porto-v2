@@ -2,13 +2,24 @@
 
   import { window_controls } from "../nav_and_links.svelte"
   import { set_darkmode } from "../color_manager.svelte"
-  import { darkmode, window_closed} from "../store/store"
+  import { darkmode, window_closed, open_previewer} from "../store/store"
   import { onMount } from "svelte"
 
-  var the_window, window_taskbar = null
+  let the_window, window_taskbar = null
 
-  export var overlay = ""
-  export var anim_init = ""
+  export function toggle_window(close, minimize = false){
+    $window_closed = !$window_closed
+    if (close){
+        the_window.classList.add(minimize ? 'minimize' : 'close')
+        window_taskbar.classList.add('window-taskbar-show')
+      }
+    else {
+        the_window.classList.remove(minimize ? 'minimize' : 'close')
+        window_taskbar.classList.remove('window-taskbar-show')
+      }
+  }
+  export let overlay = ""
+  export let anim_init = ""
 
   const darkmode_text = {text: "Dark", icon: "fa-moon"}  
   const change_darkmode_text = () => {
@@ -21,15 +32,7 @@
 
     switch (obj.index) {
       case (0):
-        $window_closed = !$window_closed
-        if (obj.active){
-          the_window.classList.add('minimize')
-          window_taskbar.classList.add('window-taskbar-show')
-        }
-        else {
-          the_window.classList.remove('minimize')
-          window_taskbar.classList.remove('window-taskbar-show')
-        }
+        toggle_window(obj.active, true)
         break
 
       case (1):
@@ -38,15 +41,7 @@
         break
 
       case (2):
-        $window_closed = !$window_closed
-        if (obj.active) {
-          the_window.classList.add('close')
-          window_taskbar.classList.add('window-taskbar-show')
-        }
-        else {
-          the_window.classList.remove('close')
-          window_taskbar.classList.remove('window-taskbar-show')
-        }
+        toggle_window(obj.active)
         break
     }
 
@@ -58,6 +53,8 @@
     $window_closed = false
     window_taskbar.classList.remove('window-taskbar-show')
     the_window.classList.remove('minimize', 'close')
+
+    $open_previewer = false
     
   }
 
@@ -66,6 +63,15 @@
     change_darkmode_text()
   })
 
+  $:{
+    // Hide taskbar when previewer is active
+    if (window_taskbar){
+      if ($window_closed){
+        if ($open_previewer) window_taskbar.classList.remove('window-taskbar-show')
+        else window_taskbar.classList.add('window-taskbar-show')
+      }
+    }
+  }
 </script>
 
 <!----------------------------------- Window Container ----------------------------------->
@@ -116,9 +122,9 @@
     <!-- Taskbar Icon Button -->
     <button class=" pointer-events-auto fixed scale-0 opacity-0 rotate-45 translucent-round bottom-10 rounded-full duration-300
                     w-[100px] h-[100px]
-                    max-xl:h-[90px] max-xl:w-[90px]
-                    max-lg:h-[80px] max-lg:w-[80px]
-                    hover:-translate-y-2
+                    max-xl:h-[80px] max-xl:w-[80px] max-xl:bottom-7
+                    max-lg:h-[70px] max-lg:w-[70px] max-lg:bottom-4
+                    hover:-translate-y-1
                     active:translate-y-0 active:bg-[--theme-white]
                     "
                     bind:this={window_taskbar} on:click={() => {open_window()}}>

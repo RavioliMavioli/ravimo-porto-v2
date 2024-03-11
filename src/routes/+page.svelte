@@ -1,12 +1,12 @@
 <script>
-  import "../../app.css"
+  import "../app.css"
   import Backdrop from "./backdrop/Backdrop.svelte"
   import Card from "./card/Card.svelte"
   import { onMount } from "svelte"
-  import { darkmode } from "../../lib/store/store"
-	import { set_darkmode } from "../../lib/color_manager.svelte"
+  import { darkmode } from "../lib/store/store"
+	import { set_darkmode } from "../lib/color_manager.svelte"
 
-  var intro_ended
+  let intro_ended
 
   onMount(() => {
     $darkmode = !($darkmode === "false") // Js moment

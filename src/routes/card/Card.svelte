@@ -1,20 +1,21 @@
 <script>
-  import acchan from "../../../assets/img/acchan.png"
-  import Window from "../../../lib/components/Window.svelte"
-  import QuarterCircle from "../../../lib/circularbar.svelte"
-  import LinedTitle from "../../../lib/lined_title.svelte"
-  import Tide from "../../../lib/tide.svelte"
-  import { nav_list, links } from "../../../lib/nav_and_links.svelte"
+  import acchan from "../../assets/img/acchan.png"
+  import Window from "../../lib/components/Window.svelte"
+  import QuarterCircle from "../../lib/circularbar.svelte"
+  import LinedTitle from "../../lib/lined_title.svelte"
+  import Tide from "../../lib/tide.svelte"
+  import { nav_list, links } from "../../lib/nav_and_links.svelte"
 
   import { tweened } from 'svelte/motion'
   import { quadOut } from 'svelte/easing'
   
-  export var intro_ended = false
-  var overlay = "absolute top-0 opacity-0 card-opacity-animate bg-white translucent h-full w-full max-sm:w-[90%] rounded-3xl pointer-events-none"
-  var anim_init = "anim"
-  //intro_ended = true
+  export let intro_ended = false
+  let main_window = null
+  let overlay = "absolute top-0 opacity-0 card-opacity-animate bg-white translucent h-full w-full max-sm:w-[90%] rounded-3xl pointer-events-none"
+  let anim_init = "anim"
+  intro_ended = true
   
-  var value = tweened(0.0, {
+  let value = tweened(0.0, {
     duration: 2000,
     easing: quadOut
   })
@@ -27,6 +28,16 @@
     }
   }
 
+  function process_nav(txt){
+    console.log("ASDASD")
+    if (main_window === null) return
+    switch (txt){
+      case "Portfolio":
+        main_window.toggle_window(true)
+        break
+    }
+  }
+
 </script>
 
 <!----------------------------------- Window Container ----------------------------------->
@@ -34,7 +45,7 @@
   <!-- Check if backdrop animation is completed -->
   {#if intro_ended}
     <!-- Window -->
-      <Window bind:overlay bind:anim_init >
+      <Window bind:overlay bind:anim_init bind:this={main_window}>
         <!---------------------- Upper Section ---------------------->
         <div class="flex-middle h-auto gap-2 mt-6
                     max-lg:flex-col max-lg:items-center">
@@ -109,15 +120,16 @@
           <!---------------------- Nav Section ---------------------->
           <div class="flex-middle gap-3 my-2">
             {#each nav_list as nav}
-              <a href={nav.link} target="_blank">
+              <!-- <a href={nav.link} target="_blank"> -->
                 <button class=" border-[--theme-nord] py-2 px-8 border-2 rounded-full group
                                 hover:bg-[--theme-white] hover:border-[--theme-white] hover:glow
                                 max-xl:px-5
                                 max-md:px-2
-                                max-sm:px-1">
+                                max-sm:px-1"
+                        on:click={() => {process_nav(nav.text)}}>
                   <p1 class="group-hover:text-[--theme-black]">{nav.text}</p1>
                 </button>
-              </a>
+              <!-- </a> -->
             {/each}
           </div>
           <!--

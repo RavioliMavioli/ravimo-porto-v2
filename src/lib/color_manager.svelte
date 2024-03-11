@@ -14,7 +14,7 @@
     {name:"theme-black", dark: "#2e3440", light: "#eceff4"},
 
     {name:"theme-glow", dark:"rgba(255,255,255,0.2)", light:"rgba(0,0,0,0.2)"}
-  ] 
+  ]
 
   export const set_darkmode = (bool) => {
     if (bool){

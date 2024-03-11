@@ -82,10 +82,10 @@ p3 {
 @media (max-width: 1280px) {
   :root {
     --h1-size:46px;
-    --h2-size:28px;
-    --h3-size:24px;
-    --p1-size:18px;
-    --p2-size:14px;
+    --h2-size:26px;
+    --h3-size:20px;
+    --p1-size:16px;
+    --p2-size:12px;
     --p3-size:10px;
   }
 }
@@ -93,10 +93,10 @@ p3 {
 @media (max-width: 768px) {
   :root {
     --h1-size:40px;
-    --h2-size:24px;
-    --h3-size:20px;
-    --p1-size:16px;
-    --p2-size:12px;
+    --h2-size:22px;
+    --h3-size:16px;
+    --p1-size:12px;
+    --p2-size:10px;
     --p3-size:8px;
   }
 }

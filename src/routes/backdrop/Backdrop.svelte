@@ -1,20 +1,21 @@
 <script>
+  import Previewer from "../../lib/components/Previewer.svelte"
+  import ImageInfo from "../../lib/components/ImageInfo.svelte"
   import { onMount } from "svelte"
-  import { quartOut } from "svelte/easing"
+  import { quartOut, quadOut } from "svelte/easing"
   import { slide } from "svelte-legos"
-  import { darkmode, window_closed } from "../../../lib/store/store"
-  import { images, portfolio } from "../../../lib/portfolio_images.svelte"
-
   import { tweened } from 'svelte/motion'
-  import { quadOut } from 'svelte/easing'
+  import { darkmode, window_closed, current_element } from "../../lib/store/store"
+  import { images, portfolio } from "../../lib/portfolio_images.svelte"
 
-  export var intro_ended = false
+
+  export let intro_ended = false
   
   let page_loaded = false
-  let darken_overlay, b_container, b_grid = null
+  let darken_overlay, b_container, b_grid, hovered_image = null
   let grad_element = []
   let current_finished_anim = 0
-  
+  let can_hover = false
   let Xval = 0
   let MAX_LENGTH = 0
   let SCROLL_LENGTH = 0
@@ -52,7 +53,7 @@
       document.addEventListener(evnt, (event) => {
       if ($window_closed){
         if (event.deltaY) Xval += event.deltaY < 0.0 ? SCROLL_LENGTH : -SCROLL_LENGTH
-        if (event.deltaX) Xval += event.deltaX < 0.0 ? SCROLL_LENGTH : -SCROLL_LENGTH
+        else if (event.deltaX) Xval += event.deltaX < 0.0 ? SCROLL_LENGTH : -SCROLL_LENGTH
         xval_set_limit()
         }
       }) 
@@ -82,8 +83,16 @@
     Xval = Xval <= -MAX_LENGTH ? -MAX_LENGTH : Xval
   }
 
+  function bg_hover(img_index){
+    if (!$window_closed) return
+    if (img_index !== null){
+      hovered_image = document.getElementById(`images-${img_index}`)
+      hovered_image.classList.add("bg-hover")
+    }
+    else hovered_image.classList.remove("bg-hover")
+  }
+
 	$: {
-    
     // Apply first scale animation
     if (page_loaded && b_container){
       b_container.classList.add("scale-anim-1")
@@ -104,9 +113,8 @@
         b_grid.classList.remove("scale-[115%]")
 
         // Apply darken image animation
-        darken_overlay.classList.add('opacity-30')
-        if ($window_closed) darken_overlay.classList.remove('opacity-30')
-        else darken_overlay.classList.add('opacity-30')
+        darken_overlay.classList.add('opacity-35')
+        if ($window_closed) darken_overlay.classList.remove('opacity-35')
       }
       
 		}
@@ -122,7 +130,13 @@
         else element.classList.add('opacity-20')
       })
     }
-
+    // Remove clickblocker on a timeframe
+    if ($window_closed){
+      setTimeout(()=>{
+        can_hover = true
+      }, 300)
+    }
+    else can_hover = false
 	}
 
 
@@ -132,13 +146,19 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="fixed flex justify-center items-center" bind:this={b_container}>
   <!-- Grid container -->
-  <div class="relative grid grid-flow-col grid-normal h-screen scale-[115%]" bind:this={b_grid}>
+  <div class="relative grid grid-flow-col grid-normal h-screen scale-[115%] gap-2
+              max-xl:gap-1" bind:this={b_grid}>
     <!-- Elements inside the grid -->
     
     <!-- 4 main background images -->
     {#each images as image}
       {#if page_loaded}
-        <div class="{image.img} relative bg-cover bg-center bg-repeat"
+        <div
+          id="images-{
+            ($darkmode === false || $darkmode === "false") ?
+            image.index_light :
+            image.index
+          }" class="{image.img} relative bg-cover bg-center bg-repeat duration-500"
           transition:slide = {
             {
               direction: (image.direction),
@@ -150,14 +170,17 @@
               easing: quartOut,
               duration: anim_duration}
           }
-          on:introend = {()=> (set_anim_state())}>
-
+          on:introend = {()=> (set_anim_state())}
+          on:mouseenter={() => {if ($darkmode === true || $darkmode === "true") bg_hover(image.index)}}
+          on:mouseleave={() => {bg_hover(null)}}>
+          <!-- Image informations -->
+          <ImageInfo current_image_object={image}/> 
           <!-- Dark Mode Gradients -->
-          <div class="{image.bg_color} relative h-full w-full opacity-0 duration-500" bind:this={grad_element[image.index]}/>
+          <div class="{image.bg_color} relative h-full w-full opacity-0 duration-300 pointer-events-none" bind:this={grad_element[image.index]}/>
 
           <!-- Light Mode Images -->
           {#if $darkmode === false || $darkmode === "false"} <!-- Js moment -->
-            <div class="{image.img_light} relative bg-cover bg-center bg-repeat w-full h-full mt-[-100vh]"
+            <div id="images-{image.index_light}" class="{image.img_light} relative bg-cover bg-center bg-repeat w-full h-full my-[-100vh] duration-300"
             transition:slide = {
               {
                 direction: (image.direction),
@@ -168,34 +191,67 @@
                   ),
                 easing: quartOut,
                 duration: anim_duration
-              }}/>
+              }}
+            on:mouseenter={() => {bg_hover(image.index_light)}}
+            on:mouseleave={() => {bg_hover(null)}}
+            >
+              <!-- Image informations -->
+              <ImageInfo current_image_object={image}/> 
+            </div>
+          
           {/if}
+      
         </div>
       {/if}
     {/each}
 
-    <!-- Portfolio background images -->
+    <!-- Portfolio images -->
 
-    {#if intro_ended}
+    {#if intro_ended && $window_closed}
       {#each portfolio as portfols}
-        <div class="{portfols.img} relative bg-cover bg-center bg-repeat w-full h-full" />
-        {#if $darkmode === false || $darkmode === "false"}
-          <div class="{portfols.img_light} relative bg-cover bg-center bg-repeat w-full h-full" />
-        {/if}
-      {/each}
+        <div
+        
+        id="images-{
+          ($darkmode === false || $darkmode === "false") ?
+          portfols.index_light :
+          portfols.index
+        }"
+        
+        class="{
+          ($darkmode === false || $darkmode === "false") ?
+          portfols.img_light :
+          portfols.img
+        } relative bg-cover bg-center bg-repeat w-full h-full duration-500"
+        
+        on:mouseenter={() => {bg_hover(
+          ($darkmode === false || $darkmode === "false") ?
+          portfols.index_light :
+          portfols.index
+        )}}
+        on:mouseleave={() => {bg_hover(null)}}
+        >
+
+          <!-- Image informations -->
+          <ImageInfo current_image_object={portfols}/> 
+
+        </div>
+      {/each}  
     {/if}
     
   </div>
   <!-- Dark overlay -->
-  <div class="absolute bg-black opacity-0 w-full h-full duration-500 pointer-events-none" bind:this={darken_overlay}/>
+  <div class="absolute bg-black opacity-0 w-full h-full duration-500 pointer-events-none" bind:this={darken_overlay} />
+
+  <!-- Previewer -->
+  <Previewer/>
   <!-- Buttons -->
   
   {#each buttons as button}
     <button class="fixed translucent-round rounded-full m-5 duration-300 flex-middle pointer-events-auto cursor-pointer
                 w-24 h-24
                 max-xl:w-20 max-xl:h-20
-                max-lg:w-16 max-lg:h-16
-                hover:-translate-y-2
+                max-lg:w-16 max-lg:h-16 max-lg:m-2
+                hover:-translate-y-1
                 active:translate-y-0 active:bg-[--theme-white]
                 {button.left ? "rotate-180 left-0" : "right-0"}
                 {$window_closed ? "scale-100 opacity-100": "opacity-0 scale-[300%] -rotate-180"}
@@ -204,9 +260,7 @@
             button.left ?
              () => {Xval += SCROLL_LENGTH; xval_set_limit()}:
              () => {Xval -= SCROLL_LENGTH; xval_set_limit()}
-          }
-                
-                >
+          }>
       <h2>
         <i class="relative {button.icon}"/>
       </h2>
@@ -214,12 +268,17 @@
     </button>
 
   {/each}
-
+  <!-- Clickblocker -->
+  {#if !can_hover}
+  <div class="absolute top-0 left-0 w-screen h-screen"></div>
+  {/if}
 </div>
 
 <style>
   /* Svelte doesn't compile these class without :global() lmao */
-
+  :global(.bg-hover) {
+    @apply scale-[97%]
+  }
   :global(.scale-anim-1) {
     animation-name: bscale-1;
     animation-duration: 1.5s;
