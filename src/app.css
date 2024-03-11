@@ -114,7 +114,7 @@ p3 {
   }
   
   .translucent-round{
-    @apply bg-[--dark-color] backdrop-blur-2xl shadow-2xl rounded-3xl shadow-[#271d3b55];
+    @apply bg-[--dark-color] backdrop-blur-2xl shadow-2xl rounded-3xl shadow-[#271d3b71];
   }
 
   .glow{
