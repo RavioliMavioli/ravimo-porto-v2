@@ -1,18 +1,32 @@
 <script context="module">
-  export const hd_url = [
-    {name: "hd_1", link: '/src/assets/img/full/1.jpg'},
-    {name: "hd_2", link: '/src/assets/img/full/2.jpg'},
-    {name: "hd_3", link: '/src/assets/img/full/3.jpg'},
-    {name: "hd_4", link: '/src/assets/img/full/4.jpg'},
-    {name: "hd_5", link: '/src/assets/img/full/5.jpg'},
-    {name: "hd_6", link: '/src/assets/img/full/6.jpg'},
+  // there's a better way, but not for now
+  import hd_1 from "$lib/assets/img/hd/1.jpg"
+  import hd_2 from "$lib/assets/img/hd/2.jpg"
+  import hd_3 from "$lib/assets/img/hd/3.jpg"
+  import hd_4 from "$lib/assets/img/hd/4.jpg"
+  import hd_5 from "$lib/assets/img/hd/5.jpg"
+  import hd_6 from "$lib/assets/img/hd/6.jpg"
+  import hd_7 from "$lib/assets/img/hd/7.jpg"
+  import hd_8 from "$lib/assets/img/hd/8.jpg"
+  import hd_9 from "$lib/assets/img/hd/9.jpg"
+  import hd_10 from "$lib/assets/img/hd/10.jpg"
+  import hd_11 from "$lib/assets/img/hd/11.jpg"
+  import hd_12 from "$lib/assets/img/hd/12.jpg"
 
-    {name: "hd_7", link: '/src/assets/img/full/7.jpg'},
-    {name: "hd_8", link: '/src/assets/img/full/8.jpg'},
-    {name: "hd_9", link: '/src/assets/img/full/9.jpg'},
-    {name: "hd_10", link: '/src/assets/img/full/10.jpg'},
-    {name: "hd_11", link: '/src/assets/img/full/11.jpg'},
-    {name: "hd_12", link: '/src/assets/img/full/12.jpg'}
+  export const hd_images = [
+    hd_1,
+    hd_2,
+    hd_3,
+    hd_4,
+    hd_5,
+    hd_6,
+    hd_7,
+    hd_8,
+    hd_9,
+    hd_10,
+    hd_11,
+    hd_12,
+
   ]
 
 </script>

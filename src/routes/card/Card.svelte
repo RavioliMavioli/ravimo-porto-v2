@@ -1,11 +1,11 @@
 <script>
-  import acchan from "../../assets/img/acchan.png"
+  import acchan from "$lib/assets/img/acchan.png"
   import Window from "../../lib/components/Window.svelte"
   import QuarterCircle from "../../lib/circularbar.svelte"
   import LinedTitle from "../../lib/lined_title.svelte"
   import Tide from "../../lib/tide.svelte"
   import { nav_list, links } from "../../lib/nav_and_links.svelte"
-
+  
   import { tweened } from 'svelte/motion'
   import { quadOut } from 'svelte/easing'
   
@@ -13,7 +13,7 @@
   let main_window = null
   let overlay = "absolute top-0 opacity-0 card-opacity-animate bg-white translucent h-full w-full max-sm:w-[90%] rounded-3xl pointer-events-none"
   let anim_init = "anim"
-  intro_ended = true
+  //intro_ended = true
   
   let value = tweened(0.0, {
     duration: 2000,

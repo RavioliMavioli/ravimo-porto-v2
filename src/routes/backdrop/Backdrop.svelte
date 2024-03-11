@@ -5,7 +5,7 @@
   import { quartOut, quadOut } from "svelte/easing"
   import { slide } from "svelte-legos"
   import { tweened } from 'svelte/motion'
-  import { darkmode, window_closed, current_element } from "../../lib/store/store"
+  import { darkmode, window_closed, open_previewer } from "../../lib/store/store"
   import { images, portfolio } from "../../lib/portfolio_images.svelte"
 
 
@@ -51,7 +51,7 @@
     // Horizontal Scroll
     ev.forEach((evnt => {
       document.addEventListener(evnt, (event) => {
-      if ($window_closed){
+      if ($window_closed && !$open_previewer){
         if (event.deltaY) Xval += event.deltaY < 0.0 ? SCROLL_LENGTH : -SCROLL_LENGTH
         else if (event.deltaX) Xval += event.deltaX < 0.0 ? SCROLL_LENGTH : -SCROLL_LENGTH
         xval_set_limit()
@@ -254,7 +254,8 @@
                 hover:-translate-y-1
                 active:translate-y-0 active:bg-[--theme-white]
                 {button.left ? "rotate-180 left-0" : "right-0"}
-                {$window_closed ? "scale-100 opacity-100": "opacity-0 scale-[300%] -rotate-180"}
+                {$window_closed ? "scale-100 opacity-100" : "opacity-0 scale-[300%]"}
+                {$open_previewer ? "scale-[0%]" : ""}
                 "
           on:click={
             button.left ?
