@@ -26,7 +26,21 @@
     hd_10,
     hd_11,
     hd_12,
+  ]
 
+  export const smol_bg = [
+    "sm-1",
+    "sm-2",
+    "sm-3",
+    "sm-4",
+    "sm-5",
+    "sm-6",
+    "sm-7",
+    "sm-8",
+    "sm-9",
+    "sm-10",
+    "sm-11",
+    "sm-12"
   ]
 
 </script>

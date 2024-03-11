@@ -2,10 +2,12 @@
   import { open_previewer, current_element, darkmode } from "../store/store"
   import { swirl } from "svelte-legos"
   import { quartOut } from "svelte/easing"
-  import { hd_images } from "../hd_images.svelte"
+  import { hd_images, smol_bg } from "../hd_images.svelte"
+  import Win10Loading from "./Win10Loading.svelte";
   
   let bg_low = null
   let index = 0
+  let show_image = false
 
   $:{
     // Change HD image to current image pressed
@@ -15,7 +17,15 @@
       
       index = Math.abs(parseInt(bg_low.slice(-2))) - 1
     }
-    console.log(index)
+    // Show image
+    if ($open_previewer){
+      show_image = true
+    }
+    else {
+      setTimeout(() => {
+        show_image = false
+      }, 300)
+    }
   }
 </script>
 
@@ -27,14 +37,18 @@
       backdrop-blur-2xl
       relative h-screen duration-500 overflow-hidden flex-middle">
     <!-- Image -->
-    <img class="fixed max-h-screen max-w-screen h-screen object-center object-cover"
-      src={hd_images[index]} alt="Loading...">
+    {#if show_image}
+      <Win10Loading />
+      <p1 class="absolute translate-y-16">Loading image</p1>
+      <img class="absolute max-h-screen max-w-screen h-screen object-center object-cover"
+      src={hd_images[index]} alt="Loading..."/>
+    {/if}
   </div>
   <!-- Close Button -->
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   {#if $open_previewer}
     <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <div class="fixed h-32 w-32 right-0 top-0 pointer-events-auto cursor-pointer flex-middle"
+    <div class="fixed h-32 w-32 right-0 top-0 cursor-pointer flex-middle pointer-events-auto z-10"
     on:click={()=>{$open_previewer = false}}
     transition:swirl = {
       {
