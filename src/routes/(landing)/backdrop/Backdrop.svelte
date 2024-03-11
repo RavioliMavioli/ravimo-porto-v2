@@ -21,6 +21,8 @@
 
   const anim_duration = 500
   const total_duration = 1000
+
+  const ev = ["scroll", "wheel"]
   
   let scrollX = tweened(0.0, {
     duration: 500,
@@ -46,12 +48,16 @@
       set_scroll_and_max_length()
     })
     // Horizontal Scroll
-    document.addEventListener("wheel" || "scroll", (event) => {
+    ev.forEach((evnt => {
+      document.addEventListener(evnt, (event) => {
       if ($window_closed){
-        Xval += event.deltaY < 0.0 ? SCROLL_LENGTH : -SCROLL_LENGTH
+        if (event.deltaY) Xval += event.deltaY < 0.0 ? SCROLL_LENGTH : -SCROLL_LENGTH
+        if (event.deltaX) Xval += event.deltaX < 0.0 ? SCROLL_LENGTH : -SCROLL_LENGTH
         xval_set_limit()
-      }
-    })    
+        }
+      }) 
+    }))
+       
   })
 
   function set_anim_state() {
