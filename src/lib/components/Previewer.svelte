@@ -24,7 +24,7 @@
     else {
       setTimeout(() => {
         show_image = false
-      }, 300)
+      }, 500)
     }
   }
 </script>
