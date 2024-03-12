@@ -1,10 +1,10 @@
 <script>
   import "../app.css"
-  import Backdrop from "./backdrop/Backdrop.svelte"
-  import Card from "./card/Card.svelte"
+  import Backdrop from "$lib/components/backdrop/Backdrop.svelte"
+  import Card from "$lib/components/card/Card.svelte"
   import { onMount } from "svelte"
-  import { darkmode } from "../lib/store/store"
-	import { set_darkmode } from "../lib/color_manager.svelte"
+  import { darkmode } from "$lib/store/store"
+	import { set_darkmode } from "$lib/etc/color_manager.svelte"
 
   let intro_ended
 

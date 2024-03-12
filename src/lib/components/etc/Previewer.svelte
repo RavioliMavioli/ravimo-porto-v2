@@ -1,9 +1,9 @@
 <script>
-  import { open_previewer, current_element, darkmode } from "../store/store"
+  import { open_previewer, current_element, darkmode } from "$lib/store/store"
   import { swirl } from "svelte-legos"
   import { quartOut } from "svelte/easing"
-  import { hd_images } from "../hd_images.svelte"
-  import Win10Loading from "./Win10Loading.svelte";
+  import { hd_images } from "$lib/etc/hd_images.svelte"
+  import Win10Loading from "$lib/components/etc/Win10Loading.svelte";
   
   let bg_low = null
   let index = 0
@@ -23,8 +23,12 @@
     }
     else {
       setTimeout(() => {
-        show_image = false
-      }, 500)
+        if (!$open_previewer) show_image = false // Prevent image from yeeting when the user is too quick
+        else {
+          show_image = false
+          setTimeout(() => {show_image = true}, 100) // Refresh image when the user is too quick
+        }
+      }, 700)
     }
   }
 </script>
@@ -35,11 +39,12 @@
       {$open_previewer ? "show":"hide"}
       pointer-events-auto 
       backdrop-blur-2xl
-      relative h-screen duration-500 overflow-hidden flex-middle">
+      relative h-screen duration-700 overflow-hidden flex-middle">
+    <!-- Loading animation -->
+    <Win10Loading />
+    <p1 class="absolute translate-y-16 text-white">Loading image</p1>
     <!-- Image -->
     {#if show_image}
-      <Win10Loading />
-      <p1 class="absolute translate-y-16">Loading image</p1>
       <img class="absolute max-h-screen max-w-screen h-screen object-center object-cover"
       src={hd_images[index]} alt="Loading..."/>
     {/if}
@@ -57,7 +62,7 @@
         duration: 1000}
     }>
     <h2>
-      <i class="fa-solid fa-x text-white" />
+      <i class="fa-solid fa-x text-white drop-shadow-xl" />
     </h2>
     
     </div>

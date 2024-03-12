@@ -1,8 +1,8 @@
 <script>
 
-  import { window_controls } from "../nav_and_links.svelte"
-  import { set_darkmode } from "../color_manager.svelte"
-  import { darkmode, window_closed, open_previewer} from "../store/store"
+  import { window_controls } from "$lib/etc/nav_and_links.svelte"
+  import { set_darkmode } from "$lib/etc/color_manager.svelte"
+  import { darkmode, window_closed, open_previewer} from "$lib/store/store"
   import { onMount } from "svelte"
 
   let the_window, window_taskbar = null

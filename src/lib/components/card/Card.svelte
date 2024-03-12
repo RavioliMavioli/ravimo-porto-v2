@@ -1,11 +1,11 @@
 <script>
-  import Window from "$lib/components/Window.svelte"
-  import Up from "$lib/components/sections/Up.svelte"
-  import Mid from "$lib/components/sections/Mid.svelte"
-  import About from "$lib/components/sections/content/About.svelte"
-  import Portfolio from "$lib/components/sections/content/Portfolio.svelte"
-  import Commission from "$lib/components/sections/content/Commission.svelte"
-  import Contact from "$lib/components/sections/content/Contact.svelte"
+  import Window from "$lib/components/etc/Window.svelte"
+  import Up from "$lib/components/card/sections/Up.svelte"
+  import Mid from "$lib/components/card/sections/Mid.svelte"
+  import About from "$lib/components/card/sections/content/About.svelte"
+  import Portfolio from "$lib/components/card/sections/content/Portfolio.svelte"
+  import Commission from "$lib/components/card/sections/content/Commission.svelte"
+  import Contact from "$lib/components/card/sections/content/Contact.svelte"
 
   export let main_window = null
   export let intro_ended = false

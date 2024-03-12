@@ -1,6 +1,6 @@
 <script>
-  import Tide from "$lib/tide.svelte"
-  import { nav_list } from "$lib/nav_and_links.svelte"
+  import Tide from "$lib/etc/tide.svelte"
+  import { nav_list } from "$lib/etc/nav_and_links.svelte"
   import {toggle_about, toggle_portfolio, toggle_commission, toggle_contact} from "$lib/store/store.js"
 
   export let h_full = false

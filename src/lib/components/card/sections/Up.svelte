@@ -1,8 +1,8 @@
 <script>
   import acchan from "$lib/assets/img/acchan.png"
-  import QuarterCircle from "$lib/circularbar.svelte"
-  import LinedTitle from "$lib/lined_title.svelte"
-  import { links } from "$lib/nav_and_links.svelte"
+  import QuarterCircle from "$lib/etc/circularbar.svelte"
+  import LinedTitle from "$lib/etc/lined_title.svelte"
+  import { links } from "$lib/etc/nav_and_links.svelte"
   import { tweened } from 'svelte/motion'
   import { quadOut } from 'svelte/easing'
   

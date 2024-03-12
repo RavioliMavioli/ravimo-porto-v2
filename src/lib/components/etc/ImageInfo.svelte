@@ -1,6 +1,6 @@
 <script>
-  import { window_closed, current_element, open_previewer } from "../store/store"
-  import { darkmode } from "../store/store"
+  import { window_closed, current_element, open_previewer } from "../../store/store"
+  import { darkmode } from "../../store/store"
 
   export let current_image_object = null
 
@@ -51,9 +51,9 @@
     <p2 class="text-white">{current_image_object.metadata.date[metadata_index]}</p2>
   </div>
   <!-- Bottom section -->
-  <div class = "h-auto w-full flex-middle justify-between flex-row p-4 bottom-hide duration-500 text-white"
+  <div class = "h-auto w-full flex-middle justify-between flex-row p-4 bottom-hide duration-500 text-white drop-shadow-xl"
     bind:this={bottom}>
-    <h3 class="text-white flex flex-col drop-shadow-2xl shadow-white">{current_image_object.metadata.description[metadata_index]}
+    <h3 class="text-white flex flex-col">{current_image_object.metadata.description[metadata_index]}
       <p1 class="text-white py-1">{current_image_object.metadata.resolution[metadata_index]}</p1>
     
     </h3>
