@@ -31,7 +31,7 @@
     index: 1,
     index_light: 5,
     metadata:{
-      description:  [ "sudo rm -rf / --no-perserve-root",
+      description:  [ "Sad Arch-chan",
                       "Ayunda Risu"],
       resolution:   [ "1754 × 1754",
                       "4960 × 3580"],
@@ -105,7 +105,7 @@
     index_light: 1,
     metadata:{
       description:  [ "Ayunda Risu",
-                      "sudo rm -rf / --no-perserve-root"],
+                      "Sad Arch-chan"],
       resolution:   [ "4960 × 3580",
                       "1754 × 1754"],
       date:         [ "10/10/2023",

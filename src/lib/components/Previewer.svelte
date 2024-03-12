@@ -2,7 +2,7 @@
   import { open_previewer, current_element, darkmode } from "../store/store"
   import { swirl } from "svelte-legos"
   import { quartOut } from "svelte/easing"
-  import { hd_images, smol_bg } from "../hd_images.svelte"
+  import { hd_images } from "../hd_images.svelte"
   import Win10Loading from "./Win10Loading.svelte";
   
   let bg_low = null

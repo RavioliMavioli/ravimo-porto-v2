@@ -1,12 +1,12 @@
 <script>
-  import Previewer from "../../lib/components/Previewer.svelte"
-  import ImageInfo from "../../lib/components/ImageInfo.svelte"
+  import Previewer from "$lib/components/Previewer.svelte"
+  import ImageInfo from "$lib/components/ImageInfo.svelte"
   import { onMount } from "svelte"
   import { quartOut, quadOut } from "svelte/easing"
   import { slide } from "svelte-legos"
   import { tweened } from 'svelte/motion'
-  import { darkmode, window_closed, open_previewer } from "../../lib/store/store"
-  import { images, portfolio } from "../../lib/portfolio_images.svelte"
+  import { darkmode, window_closed, open_previewer } from "$lib/store/store"
+  import { images, portfolio } from "$lib/portfolio_images.svelte"
 
 
   export let intro_ended = false

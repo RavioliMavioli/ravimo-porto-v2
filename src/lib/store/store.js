@@ -6,6 +6,11 @@ export const darkmode = writable(browser && localStorage.getItem("darkmode") || 
 export const current_element = writable(null)
 export const open_previewer = writable(false)
 
+export const toggle_about = writable(false)
+export const toggle_portfolio = writable(false)
+export const toggle_commission = writable(false)
+export const toggle_contact = writable(false)
+
 // Value retreived in string, somehow
 
 darkmode.subscribe((val) => {

@@ -202,6 +202,17 @@ p3 {
   animation-timing-function: ease-out;
 }
 
+.show-section{
+  animation-name: show-sec;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+}
+
+.hide-section{
+  animation-name: hide-sec;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+}
 @keyframes op-0-1-0 {
   0% {
     opacity: 0;
@@ -211,6 +222,23 @@ p3 {
   }
   100% {
     opacity: 0;
+  } 
+}
+
+@keyframes show-sec {
+  0% {
+    height: 0px;
   }
-  
+  100% {
+    height: 300px;
+  } 
+}
+
+@keyframes hide-sec {
+  0% {
+    height: 300px;
+  }
+  100% {
+    height: 0px;
+  } 
 }
