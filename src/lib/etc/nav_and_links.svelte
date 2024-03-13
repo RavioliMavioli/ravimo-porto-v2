@@ -1,8 +1,8 @@
 <script context="module">
   export const window_controls = [
-    {color: "text-[--theme-yellow]", active: false, index: 0},
-    {color: "text-[--theme-green]", active: false, index: 1},
-    {color: "text-[--theme-red]", active: false, index: 2},
+    {color: "text-[--theme-yellow]", active: false, index: 0, custom: ""},
+    {color: "text-[--theme-green]", active: false, index: 1, custom: "blocked"},
+    {color: "text-[--theme-red]", active: false, index: 2, custom: ""},
   ]
 
   export const nav_list = [

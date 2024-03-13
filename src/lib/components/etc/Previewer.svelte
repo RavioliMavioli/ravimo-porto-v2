@@ -9,6 +9,17 @@
   let index = 0
   let show_image = false
 
+  function img_download(img, index = 0) {
+    let name
+    if ($darkmode === true || $darkmode === "true") name = $current_element.metadata.description[0]
+    else name = $current_element.metadata.description[1]
+
+    const downloadLink = document.createElement("a")
+    downloadLink.href = img
+    downloadLink.download = name
+    downloadLink.click()
+  }
+
   $:{
     // Change HD image to current image pressed
     if ($current_element !== null){
@@ -47,6 +58,29 @@
     {#if show_image}
       <img class="absolute max-h-screen max-w-screen h-screen object-center object-cover"
       src={hd_images[index]} alt="Loading..."/>
+      <!-- TODO: Put this in loop -->
+      <!-- Download button -->
+      <button class="pointer-events-auto absolute translucent-round bg-[--theme-absolute-white] bottom-10 right-10 rounded-full duration-300
+                    w-[90px] h-[90px]
+                    max-xl:h-[80px] max-xl:w-[80px] max-xl:bottom-7 max-xl:right-7
+                    max-lg:h-[60px] max-lg:w-[60px] max-lg:bottom-4 max-lg:right-4
+                    hover:-translate-y-1
+                    active:translate-y-0 active:bg-[--theme-nord] group
+                    "
+                    on:click={() => {img_download(hd_images[index], index)}}>
+        <h3><i class="fa-solid fa-download text-[--theme-nord] group-active:text-white"></i></h3>
+      </button>
+      <!-- Zoom button -->
+      <a class="pointer-events-auto flex-middle absolute translucent-round bg-[--theme-absolute-white] bottom-10 right-10 rounded-full duration-300
+                    w-[90px] h-[90px] translate-y-[-130%]
+                    max-xl:h-[80px] max-xl:w-[80px] max-xl:bottom-7 max-xl:right-7
+                    max-lg:h-[60px] max-lg:w-[60px] max-lg:bottom-4 max-lg:right-4
+                    hover:translate-y-[-135%]
+                    active:translate-y-[-130%] active:bg-[--theme-nord] group
+                    "
+                    href={hd_images[index]} target="_blank">
+        <h3><i class="fa-solid fa-magnifying-glass text-[--theme-nord] group-active:text-white"></i></h3>
+      </a>
     {/if}
   </div>
   <!-- Close Button -->

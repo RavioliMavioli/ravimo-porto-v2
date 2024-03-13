@@ -10,7 +10,7 @@
 
   onMount(() => {
     $darkmode = !($darkmode === "false") // Js moment
-    set_darkmode($darkmode)
+    set_darkmode($darkmode) // Init dark mode
   })
 
 </script>

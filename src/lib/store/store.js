@@ -11,6 +11,8 @@ export const toggle_portfolio = writable(false)
 export const toggle_commission = writable(false)
 export const toggle_contact = writable(false)
 
+export const can_maximize = writable(true)
+
 // Value retreived in string, somehow
 
 darkmode.subscribe((val) => {

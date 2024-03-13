@@ -25,6 +25,7 @@
 
 <!---------------------- Upper Section ---------------------->
 <div class="flex-middle h-auto gap-2 mt-6
+            max-xl:mt-4
             max-lg:flex-col max-lg:items-center">
 
   <!-- Arch-chan Container -->

@@ -7,12 +7,12 @@
   import Commission from "$lib/components/card/sections/content/Commission.svelte"
   import Contact from "$lib/components/card/sections/content/Contact.svelte"
 
-  export let main_window = null
   export let intro_ended = false
-
+  
   let overlay = "absolute top-0 opacity-0 card-opacity-animate bg-white translucent h-full w-full max-sm:w-[90%] rounded-3xl pointer-events-none"
   let anim_init = "anim"
   let h_full = false
+  let main_window = null
   //intro_ended = true
 
 </script>
