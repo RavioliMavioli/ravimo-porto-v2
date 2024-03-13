@@ -69,7 +69,7 @@
         <div class="flex-middle gap-4 pt-5 max-sm:flex-col max-sm:items-start">
           <i class="fa-solid fa-paintbrush text-[--theme-green] flex flow-row gap-2"><p2>illustrator</p2></i>
           <i class="fa-solid fa-gamepad text-[--theme-purple] flex flow-row gap-2"><p2>Game Dev</p2></i>
-          <i class="fa-solid fa-globe text-[--theme-blue] flex flow-row gap-2"><p2>Front End Dev</p2></i>
+          <!--<i class="fa-solid fa-globe text-[--theme-blue] flex flow-row gap-2"><p2>Front End Dev</p2></i>-->
         </div>
       </div>
       <!-- Second Line -->

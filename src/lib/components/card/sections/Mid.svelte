@@ -10,6 +10,12 @@
   let toggles = [toggle_about, toggle_portfolio, toggle_commission, toggle_contact]
   let last_button = null
 
+  function h_full_false(){
+    setTimeout(()=>{
+      h_full = false
+    }, 500)
+  }
+
   function toggle_nav(txt){
     if (main_window === null) return
     
@@ -25,7 +31,7 @@
     })
     
     // For turning off button from previously clicked button
-    if (last_button === txt && h_full === true) {h_full = false; return}
+    if (last_button === txt && h_full === true) {h_full_false(); return}
 
     last_button = txt
     h_full = true

@@ -1,5 +1,6 @@
 <script>
   import "../app.css"
+  import License from "$lib/components/license/License.svelte"
   import Backdrop from "$lib/components/backdrop/Backdrop.svelte"
   import Card from "$lib/components/card/Card.svelte"
   import { onMount } from "svelte"
@@ -17,5 +18,6 @@
 
 <Backdrop bind:intro_ended />
 <Card bind:intro_ended />
+<License bind:intro_ended />
 
 <svelte:window/>
