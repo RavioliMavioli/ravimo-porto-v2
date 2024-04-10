@@ -1,8 +1,7 @@
 <script>
-
   import { window_controls } from "$lib/etc/nav_and_links.svelte"
   import { set_darkmode } from "$lib/etc/color_manager.svelte"
-  import { darkmode, window_closed, open_previewer, can_maximize} from "$lib/store/store"
+  import { window_element, darkmode, window_closed, open_previewer, can_maximize} from "$lib/store/store"
   import { onMount } from "svelte"
 
   let the_window, window_taskbar = null
@@ -112,9 +111,10 @@
             max-xl:min-w-[70%] max-xl:min-h-[80%]
             max-md:min-w-[90%] max-md:min-h-[85%]"
             bind:this={the_window}>
-    <!-- Window Container -->
+    <!-- Window Container (Scrollable) -->
     <div class="relative scroll-smooth no-scrollbar overflow-y-scroll mt-14 mb-6 px-[30px] h-full w-full
-                max-md:mt-10">
+                max-md:mt-10"
+                bind:this={$window_element}>
     
       <!-- Window Content -->
       <slot />

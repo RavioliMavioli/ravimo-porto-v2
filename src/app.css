@@ -122,6 +122,13 @@ p3 {
     -moz-box-shadow: 0px 0px 16px 0px var(--theme-glow);
     box-shadow: 0px 0px 16px 0px var(--theme-glow);
   }
+  .button-theme{
+    @apply border-[--theme-nord] py-2 px-8 border-2 rounded-full
+                hover:bg-[--theme-white] hover:border-[--theme-white] hover:glow
+                max-xl:px-5
+                max-md:px-2
+                max-sm:px-1;
+  }
 }
 
 .corner-border-l, .corner-border-r, .corner-border-l-nord{

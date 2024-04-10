@@ -2,7 +2,7 @@
   import Tide from "$lib/etc/tide.svelte"
   import { nav_list, window_controls } from "$lib/etc/nav_and_links.svelte"
   import { toggle_about, toggle_portfolio, toggle_commission, toggle_contact } from "$lib/store/store.js"
-  import { can_maximize } from "$lib/store/store";
+  import { can_maximize, window_closed } from "$lib/store/store";
 
   export let h_full = false
   export let main_window = null
@@ -47,6 +47,10 @@
         break
       case "Portfolio":
         $toggle_portfolio = true
+        // temporary
+        main_window.toggle_window(true)
+        document.getElementById(`nav-${txt}`).classList.remove("activated")
+        document.getElementById(`txt-${txt}`).classList.remove("txt-activated")
         break
       case "Commission":
         $toggle_commission = true
@@ -67,11 +71,7 @@
   <div class="flex-middle gap-3 my-2">
     {#each nav_list as nav}
       <!-- <a href={nav.link} target="_blank"> -->
-        <button class=" border-[--theme-nord] py-2 px-8 border-2 rounded-full group
-                        hover:bg-[--theme-white] hover:border-[--theme-white] hover:glow
-                        max-xl:px-5
-                        max-md:px-2
-                        max-sm:px-1"
+        <button class="button-theme group"
                 id="nav-{nav.text}"
                 on:click={() => {toggle_nav(nav.text)}}>
           <p1 id="txt-{nav.text}" class="group-hover:text-[--theme-black]">{nav.text}</p1>
@@ -85,7 +85,7 @@
 
 <style>
   :global(.activated){
-    @apply bg-[--theme-white]
+    @apply bg-[--theme-white] border-[--theme-white]
   }
 
   :global(.txt-activated){
