@@ -27,7 +27,7 @@
     emuached = true
     setTimeout(()=>{
       emuached = false
-    }, 1)
+    }, 25)
     let emuach_audio = new Audio(emuach_mp3)
     emuach_audio.volume = 0.2
     if (!mute){
@@ -64,7 +64,7 @@
     {#each emuach_arr as em}
       {#if emuaches === em && emuached}
         <img class="absolute" src={emuach_img} width="250px" alt=""
-        out:fly={{ y: '-20%', delay: (mute ? "25" : "25") }}
+        out:fly={{ y: '-20%' }}
         >
       {/if}
     {/each}
