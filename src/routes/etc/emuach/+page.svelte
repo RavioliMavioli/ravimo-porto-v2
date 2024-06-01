@@ -1,10 +1,11 @@
 <script>
   import "./components/app.css"
+  import EmuachAudio from "./components/emuach_audio.svelte"
+  import { play_emuach } from "./components/emuach_audio.svelte"
   import { emuach_num } from "$lib/store/store.js"
   import { fly } from './components/fly'
   import acchan from "$lib/assets/img/acchan.png"
   import emuach_img from "../emuach/emuach.jpg"
-  import emuach_mp3 from "../emuach/emuach.mp3"
   
   let emuach_num_int = 0
   let emuaches = 0
@@ -18,7 +19,7 @@
     emuaches += 1
     $emuach_num = emuach_num_int
 
-    if (emuaches >= 20){
+    if (emuaches >= emuach_arr.length - 1){
       emuaches = 0
     }
   }
@@ -28,24 +29,21 @@
     setTimeout(()=>{
       emuached = false
     }, 25)
-    let emuach_audio = new Audio(emuach_mp3)
-    emuach_audio.volume = 0.2
+  
     if (!mute){
-      emuach_audio.play()
+      play_emuach()
     }
     
-    
-    //emuach_arr.push()
   }
 
   $: {
     emuach_num_int = parseInt($emuach_num)
-    //let a = document.getElementById
   }
 
 </script>
 
 <div class="flex-middle w-screen h-screen flex-col gap-5">
+  <EmuachAudio />
   <p class="text-[#ffffff65] z-50 h-0" >emuaches</p>
   <h1 class="text-white flex-middle flex-row h-auto w-auto z-50" >{$emuach_num}
     <span>
