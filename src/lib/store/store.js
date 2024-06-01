@@ -15,8 +15,13 @@ export const toggle_contact = writable(false)
 
 export const can_maximize = writable(true)
 
+export const emuach_num = writable(browser && localStorage.getItem("emuach_num") || 0)
+
 // Value retreived in string, somehow
 
 darkmode.subscribe((val) => {
   browser && localStorage.setItem("darkmode", val)
+})
+emuach_num.subscribe((val) => {
+  browser && localStorage.setItem("emuach_num", val)
 })

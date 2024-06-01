@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --dark-color: #242b39bb;
+
+  --theme-nord: #4c566a;
+  --theme-red: #bf616a;
+  --theme-green: #a3be8c;
+  --theme-yellow: #ebcb8b;
+  --theme-blue: #5e81ac;
+  --theme-purple: #b48ead;
+  --theme-cyan: #81a1c1;
+  --theme-white: #eceff4;
+  --theme-black: #2e3440;
+  
+  --theme-glow: rgba(255,255,255,0.2);
+
+  --theme-absolute-white: #eceff4;
+  }
+
+:root {
+  --h1-size:56px;
+  --h2-size:32px;
+  --h3-size:26px;
+  --p1-size:20px;
+  --p2-size:16px;
+  --p3-size:12px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  font-family: 'Noto Sans', sans-serif;
+  @apply text-[--theme-white]
+}
+
+h1 {
+  font-size: var(--h1-size);
+  font-weight: bold;
+}
+
+h2 {
+  font-size: var(--h2-size);
+  font-weight: bold;
+}
+
+h3 {
+  font-size: var(--h3-size);
+  font-weight: bold;
+}
+
+p1 {
+  font-size: var(--p1-size);
+  font-weight: normal;
+}
+
+p2 {
+  font-size: var(--p2-size);
+  font-weight: normal;
+}
+
+p3 {
+  font-size: var(--p3-size);
+  font-weight: normal;
+}
+
+@media (max-width: 2000px) {
+  :root {
+    --h1-size:56px;
+    --h2-size:32px;
+    --h3-size:26px;
+    --p1-size:20px;
+    --p2-size:16px;
+    --p3-size:12px;
+  }
+}
+
+@media (max-width: 1280px) {
+  :root {
+    --h1-size:46px;
+    --h2-size:26px;
+    --h3-size:20px;
+    --p1-size:16px;
+    --p2-size:12px;
+    --p3-size:10px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --h1-size:40px;
+    --h2-size:22px;
+    --h3-size:16px;
+    --p1-size:12px;
+    --p2-size:10px;
+    --p3-size:8px;
+  }
+}
+
+@layer components{
+
+  .flex-middle{
+    @apply flex items-center justify-center align-middle w-full h-full;
+  }
+  .solid-deafult{
+    @apply bg-[--dark-color];
+  }
+  .translucent{
+    @apply bg-[--dark-color] backdrop-blur-2xl shadow-2xl;
+  }
+  
+  .translucent-round{
+    @apply bg-[--dark-color] backdrop-blur-2xl shadow-2xl rounded-3xl shadow-[#271d3b71];
+  }
+
+  .glow{
+    -webkit-box-shadow:0px 0px 16px 0px var(--theme-glow);
+    -moz-box-shadow: 0px 0px 16px 0px var(--theme-glow);
+    box-shadow: 0px 0px 16px 0px var(--theme-glow);
+  }
+  .button-theme{
+    @apply border-[--theme-nord] py-2 px-8 border-2 rounded-full
+                hover:bg-[--theme-white] hover:border-[--theme-white] hover:glow
+                max-xl:px-5
+                max-md:px-2
+                max-sm:px-1;
+  }
+}
+
+.corner-border-l, .corner-border-r, .corner-border-l-nord{
+  position: absolute;
+  display: block;
+  content: "";
+  width: 20px;
+  height: 20px;
+  border-top: 2px solid var(--theme-white);
+}
+
+.corner-border-l {
+  border-left: 2px solid var(--theme-white);
+  @apply left-0 rounded-tl-xl
+}
+
+.corner-border-r {
+  border-right: 2px solid var(--theme-white);
+  @apply right-0 rounded-tr-xl
+
+}
+
+.corner-border-l-nord {
+  border-top: 2px solid var(--theme-nord);
+  border-left: 2px solid var(--theme-nord);
+  @apply left-0 rounded-tl-xl
+
+}
+.border-top-r{
+  position:absolute;
+  top:9px;
+  left:9px;
+  height:100px;
+  width:100px;
+  background-color:var(--theme-white);
+  border:1px solid red;
+}
+
+.border-l-only{
+  position: absolute;
+  display: block;
+  content: "";
+  width: 20px;
+  height: 20px;
+  border-left: 2px solid var(--theme-nord);
+  @apply left-0
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.maximize{
+  @apply h-screen w-screen rounded-none
+}
+
+.minimize{
+  @apply scale-0 mt-[83vh] rounded-none opacity-50
+}
+
+.close{
+  @apply scale-90 opacity-0 pointer-events-none
+}
+
+.window-taskbar-show {
+  @apply scale-100 opacity-100 rotate-0
+}
+
+.opacity-0-100-0{
+  animation-name: op-0-1-0;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+}
+
+.show-section{
+  animation-name: show-sec;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+}
+
+.hide-section{
+  animation-name: hide-sec;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+}
+@keyframes op-0-1-0 {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  } 
+}
+
+@keyframes show-sec {
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 300px;
+  } 
+}
+
+@keyframes hide-sec {
+  0% {
+    height: 300px;
+  }
+  100% {
+    height: 0px;
+  } 
+}
